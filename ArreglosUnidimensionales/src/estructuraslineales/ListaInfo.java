@@ -1,7 +1,7 @@
 package estructuraslineales;
 
 public interface ListaInfo {
-
+    
     public boolean estaVacia();
 
     public boolean estaLLeno();
@@ -38,7 +38,7 @@ public interface ListaInfo {
 
     public void rellenar(Object valor, int cantidad);
 
-    public ListaInfoEstatica clonar();
+    public ListaInfo clonar();
 
     public ListaInfoEstatica subLista(int indiceInicial, int indiceFinal);
 
@@ -59,4 +59,6 @@ public interface ListaInfo {
     public boolean copiarLista(ListaInfoEstatica lista2);
 
     public Object verFinal();
+
+    public void mostrarOI();
 }

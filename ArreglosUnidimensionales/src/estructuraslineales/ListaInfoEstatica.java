@@ -439,4 +439,10 @@ public class ListaInfoEstatica implements VectorListaInfo{
         throw new UnsupportedOperationException("Unimplemented method 'borrarInicio'");
     }
 
+    @Override
+    public void mostrarOI() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'mostrarOI'");
+    }
+
 }      
