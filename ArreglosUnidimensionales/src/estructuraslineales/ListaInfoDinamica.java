@@ -166,13 +166,6 @@ public class ListaInfoDinamica implements ListaInfo{
         
         throw new UnsupportedOperationException("Unimplemented method 'esIgual'");
     }
-
-    @Override
-    public boolean cambiar(Object valorViejo, Object valorNuevo, int numVeces) {
-        
-        throw new UnsupportedOperationException("Unimplemented method 'cambiar'");
-    }
-
     @Override
     public ListaInfoEstatica encontrarValores(Object valor) {   
         throw new UnsupportedOperationException("Unimplemented method 'encontrarValores'");
@@ -189,12 +182,6 @@ public class ListaInfoDinamica implements ListaInfo{
     public ListaInfoEstatica subLista(int indiceInicial, int indiceFinal) {
         throw new UnsupportedOperationException("Unimplemented method 'subLista'");
     }
-
-    @Override
-    public boolean redimensionar(int maximo) {
-        throw new UnsupportedOperationException("Unimplemented method 'redimensionar'");
-    }
-
     @Override
     public void rellenar(Object valor) {   
         throw new UnsupportedOperationException("Unimplemented method 'rellenar'");
@@ -459,5 +446,190 @@ public class ListaInfoDinamica implements ListaInfo{
         }
     }    
 
-    
+    @Override
+    public boolean cambiar(Object valorViejo, Object valorNuevo, int numVeces) {
+        Nodo temp = apuntadorInicial;
+        int contadorDeIteraciones = 0;
+        while(temp != null){
+            //Revisamos cada dato de la lista 
+            if(temp.getDato().equals(valorViejo)){
+                temp.setDato(valorNuevo);
+            }
+            temp = temp.getEnlaceDerecho();
+            contadorDeIteraciones++;
+            //Cuando ya se hayan cambiado los elementos el numero de veces que 
+            if (contadorDeIteraciones == numVeces) {
+                break;
+            }
+        }
+        return true;
+    }
+
+    public boolean cambiar(int indice, Object valor){   
+        if(this.obtenerCantidadDeElementos() < indice){
+            return false;
+        }
+        Nodo temp = apuntadorInicial;
+        int contadorDeIteraciones = 0;
+        while(temp != null){
+            //Cuando ya se hayan cambiado los elementos el numero de veces que 
+            if (contadorDeIteraciones == indice){
+                temp.setDato(valor);
+                break;
+            }
+            contadorDeIteraciones += 1;
+            temp = temp.getEnlaceDerecho();
+        }
+        return true;
+    }
+
+    public Object obtener(int indice){
+        //Se verifica que nos den un indice valido
+        if(this.obtenerCantidadDeElementos() < indice){
+            return false;
+        }
+        Nodo temp = apuntadorInicial;
+        int contadorDeIteraciones = 0;
+        Object elementoEncontrado = null;
+        //Recorremos toda la lista para obtener el elemento indicado
+        while(temp != null){
+            if (contadorDeIteraciones == indice){
+                elementoEncontrado = temp.getDato();
+                break;
+            }
+            contadorDeIteraciones += 1;
+            temp = temp.getEnlaceDerecho();
+        }
+        return elementoEncontrado;
+    }
+
+    public boolean esIgual(ListaInfo listaDatos2){
+        //Verificamos las instancias del argumento
+        if(listaDatos2 instanceof ListaInfoEstatica){
+            ListaInfoEstatica list = (ListaInfoEstatica) listaDatos2;
+            if(list.capacidad() != this.obtenerCantidadDeElementos()) return false;//Si las listas no son del mismo tamanio entonces no son iguales
+            int contadorDeIgualdades = 0;
+            int totalDeIgualdades = this.obtenerCantidadDeElementos();
+            // Se itera sobre las listas 
+            Nodo temp = apuntadorInicial;
+            for (int lugar=0; lugar < this.obtenerCantidadDeElementos(); lugar++){
+                if (temp.getDato().equals(list.obtenerElemento(lugar))) contadorDeIgualdades+=1;
+                temp = temp.getEnlaceDerecho();
+            }
+            //Se verifica si son iguales
+            if (contadorDeIgualdades == totalDeIgualdades) return true;
+            else return false;
+
+        }else if(listaDatos2 instanceof ListaInfoDinamica){
+
+            ListaInfoDinamica list = (ListaInfoDinamica) listaDatos2;
+            if (list.obtenerCantidadDeElementos() != this.obtenerCantidadDeElementos()) return false;
+            int contadorDeIgualdades = 0;
+            int totalDeIgualdades = this.obtenerCantidadDeElementos();
+            //Se itera sobre las listas
+            Nodo temp = apuntadorInicial;
+            Nodo temp2 = list.apuntadorInicial;
+            while (temp != null && temp2 != null){
+                if (temp.getDato().equals(temp2.getDato())) contadorDeIgualdades+=1;
+                temp = temp.getEnlaceDerecho();
+                temp2 = temp2.getEnlaceDerecho();
+            }
+            //Se verifica si son iguales
+            if (contadorDeIgualdades == totalDeIgualdades) return true;
+            else return false;
+
+        }else if(listaDatos2 instanceof ListaInfoEstaticaNumerica){
+            ListaInfoEstaticaNumerica list = (ListaInfoEstaticaNumerica) listaDatos2;
+            if (list.capacidad() != this.obtenerCantidadDeElementos()) return false;
+            int contadorDeIgualdades = 0;
+            int totalDeIgualdades = this.obtenerCantidadDeElementos();
+            //Se itera sobre las listas
+            Nodo temp = apuntadorInicial;
+            for (int lugar=0; lugar < this.obtenerCantidadDeElementos(); lugar++){
+                if (temp.getDato().equals(list.obtenerElemento(lugar))) contadorDeIgualdades+=1;
+                temp = temp.getEnlaceDerecho();
+            }
+            //Verificamos si son iguales
+            if (contadorDeIgualdades == totalDeIgualdades) return true;
+            else return false;
+        }else{//No es una lista info
+            return false;
+        }
+    }
+
+    @Override
+    public boolean redimensionar(int maximo) {
+        /*Tenemos 3 casos para este metodo
+        1 -> que el maximo sea mayor que el tamanio actual (se reyena de nulls)
+        2 -> que el maximo sea menor que el tamanio actual (se borrar los elementos sobrantes)
+        3 -> que el maximo sea igual que el tamanio actual (en este caso no se hace nada)
+        */
+        if (maximo > this.obtenerCantidadDeElementos()) {
+            int cantidadDeElementosNuevos = maximo - this.obtenerCantidadDeElementos();
+            for (int insercion = 0; insercion < cantidadDeElementosNuevos; insercion++) {
+                this.insertar(null);
+            }
+            return true;
+
+        }else if(maximo < this.obtenerCantidadDeElementos()){
+            Nodo temp = apuntadorInicial;
+            ColaInfoDinamica colaDeAlmacen = new ColaInfoDinamica();
+            for (int insercion = 0; insercion < maximo; insercion++) {
+                colaDeAlmacen.poner(temp.getDato());
+                temp = temp.getEnlaceDerecho();
+            }
+            this.vaciar();
+            for (int insercion = 0; insercion < maximo; insercion++) {
+                this.insertar(colaDeAlmacen.quitar());
+            }
+            return true;
+        }
+        else{//Es el mismo tamanio
+            return false;
+        }
+    }
+
+    public Object borrar(int indice){
+        Object elementoEnElIndice = this.obtener(indice);//Obtenemos el indice antes de eliminarlo
+        int cantidadDeElementos = this.obtenerCantidadDeElementos();
+        int nuevaCantidadDeElementos = cantidadDeElementos - 1;//Como borramos un elemento el nuevo tamanio va a ser el mismo menos uno
+        Nodo temp = apuntadorInicial;
+        ColaInfoDinamica colaDeAlmacen = new ColaInfoDinamica();
+        //Ponemos todos los elementos de la lista actual en la cola exepto el que se va a borrar
+        for (int insercion = 0; insercion < cantidadDeElementos; insercion++) {
+            if (temp.getDato() != elementoEnElIndice) {
+                colaDeAlmacen.poner(temp.getDato());    
+            }
+            temp = temp.getEnlaceDerecho();
+        }
+        //Vaciamos y rellenamos la lista con todos los elementos que estan en la cola
+        this.vaciar();
+        for (int insercion = 0; insercion < nuevaCantidadDeElementos; insercion++) {
+            this.insertar(colaDeAlmacen.quitar());
+        }
+        return elementoEnElIndice;
+    }
+
+    public ListaInfoDinamica borrarVariosElementos(Object valor){
+        ListaInfoDinamica elementosBorrados = new ListaInfoDinamica();
+        ColaInfoDinamica colaDeAlmacen = new ColaInfoDinamica();//Esta cola es para poner los elementos eliminados
+        int tamanioOriginal = this.obtenerCantidadDeElementos();//Esta variable me ayuda a saber el tamanio que va a tener la lista despues de eliminar los elementos
+        Nodo temp = apuntadorInicial;
+        for(int index = 0; index < tamanioOriginal; index++){//Recorro toda la lista
+            if (temp.getDato() != valor) {//Aniado los elementos que voy a mantener a la cola
+                colaDeAlmacen.poner(temp.getDato());
+            }
+            if(temp.getDato().equals(valor)){//Aniado los elementos que se borrar a la lista de elementos borrados
+                elementosBorrados.insertar(temp.getDato());
+            }
+            temp = temp.getEnlaceDerecho();
+        }
+        //Se vacia y se rellena la lista actualizada
+        this.vaciar();
+        int tamanioNuevo = tamanioOriginal - elementosBorrados.obtenerCantidadDeElementos();
+        for(int lugar=0; lugar < tamanioNuevo; lugar++){
+            this.insertar(colaDeAlmacen.quitar());
+        }
+        return elementosBorrados;        
+    }
 }

@@ -8,11 +8,8 @@ import estructurasnolineales.MatrizInfo2;
 public class PruebaListaInfoDinamica2 {
     public static void main(String[] args) {
         ListaInfoDinamica lista = new ListaInfoDinamica();
-        ListaInfoEstatica listaPrueba = new ListaInfoEstatica(3);
-
-        listaPrueba.insertar(2);
-        listaPrueba.insertar(1);
-        listaPrueba.insertar(3);
+        ListaInfoDinamica lista2 = new ListaInfoDinamica();
+        ListaInfoEstatica listaEstatica = new ListaInfoEstatica(3);
 
         //Mostrar oi
             // lista.mostrarOI();
@@ -62,13 +59,95 @@ public class PruebaListaInfoDinamica2 {
             // SalidaPorDefecto.consola("El 0 aparece "+lista.contar(0)+" veces\n");
         
         //Invertir
-            lista.insertar('a');
-            lista.insertar('b');
-            lista.insertar('c');
+            // lista.insertar('a');
+            // lista.insertar('b');
+            // lista.insertar('c');
+            // lista.mostrar();
+            // lista.invertir();
+            // SalidaPorDefecto.consola("\nLista invertida:\n");
+            // lista.mostrar();
+        
+        //Cambiar
+            // lista.insertar(1);
+            // lista.insertar(1);
+            // lista.insertar(1);
+            // lista.insertar(0);
+            // lista.mostrar();
+            // lista.cambiar(1, '@', 2);
+            // SalidaPorDefecto.consola("\nCambiando el 1 por '@' 2 veces\n");
+            // lista.mostrar();
+
+        //Cambiar indice en especifico
+            // lista.insertar('A');
+            // lista.insertar('B');
+            // lista.insertar('C');
+            // lista.insertar('D');
+            // lista.insertar('E');
+            // lista.mostrar();
+            // SalidaPorDefecto.consola("\nCambiando el indice 2 por 999\n");
+            // lista.cambiar(2, 999);
+            // lista.mostrar();
+        //Obtener
+            // lista.insertar('H');
+            // lista.insertar('O');
+            // lista.insertar('L');
+            // lista.insertar('A');
+            // lista.mostrar();
+            // SalidaPorDefecto.consola("\nElemento en indice 2: "+lista.obtener(2));;
+
+        //Es igual
+            lista.insertar(1);
+            lista.insertar(2);
+            lista.insertar(3);
+            lista2.insertar(2);
+            lista2.insertar(1);
+            lista2.insertar(3);
             lista.mostrar();
-            lista.invertir();
-            SalidaPorDefecto.consola("\nLista invertida:\n");
-            lista.mostrar();
-            
+            SalidaPorDefecto.consola("\n");
+            lista2.mostrar();
+            SalidaPorDefecto.consola("\nSon iguales?: " + lista.esIgual(lista2));
+
+        //Redimensionar
+            // lista.insertar(1);
+            // lista.insertar(2);
+            // lista.insertar(3);
+            // lista.insertar(4);
+            // lista.insertar(5);
+            // lista.mostrar();
+            // SalidaPorDefecto.consola("\nLista redimensionada a 10:\n");
+            // lista.redimensionar(10);
+            // lista.mostrar();
+            // lista.vaciar();
+            // lista.insertar(1);
+            // lista.insertar(2);
+            // lista.insertar(3);
+            // lista.insertar(4);
+            // lista.insertar(5);;
+            // lista.redimensionar(2);
+            // SalidaPorDefecto.consola("\nLista redimensionada a 2:\n");
+            // lista.mostrar();
+
+        //Borrar
+            // lista.insertar('A');
+            // lista.insertar('B');
+            // lista.insertar('C');
+            // lista.mostrar();
+            // SalidaPorDefecto.consola("\nEliminando el indice 1\n");
+            // lista.borrar(1);
+            // lista.mostrar();
+        
+        //Borrar varios elementos (Object valor)
+            // lista.insertar('1');
+            // lista.insertar('1');
+            // lista.insertar('0');
+            // lista.insertar('0');
+            // lista.insertar('0');
+            // lista.insertar('1');
+            // lista.mostrar();
+            // SalidaPorDefecto.consola("\nBorrando el 0:\n");
+            // var borrados = lista.borrarVariosElementos('0');
+            // lista.mostrar();
+            // SalidaPorDefecto.consola("\nElementos borrados:\n");
+            // borrados.mostrar();
     }
 }
