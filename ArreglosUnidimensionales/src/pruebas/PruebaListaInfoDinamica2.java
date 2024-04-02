@@ -4,12 +4,12 @@ import entradasalida.SalidaPorDefecto;
 import estructuraslineales.ListaInfoDinamica;
 import estructuraslineales.ListaInfoEstatica;
 import estructurasnolineales.MatrizInfo2;
+import utilerias.comunes.TipoTabla;
 
 public class PruebaListaInfoDinamica2 {
     public static void main(String[] args) {
         ListaInfoDinamica lista = new ListaInfoDinamica();
         ListaInfoDinamica lista2 = new ListaInfoDinamica();
-        ListaInfoEstatica listaEstatica = new ListaInfoEstatica(3);
 
         //Mostrar oi
             // lista.mostrarOI();
@@ -19,18 +19,54 @@ public class PruebaListaInfoDinamica2 {
             // lista2.mostrar();
             // SalidaPorDefecto.consola("\n");
         //Pasar a info estatica
-            // var listaestatica = lista.aListaEstatica();
+            // lista.insertar('X');
+            // lista.insertar('Y');
+            // lista.insertar('Z');
+            // lista.insertar('W');
             // lista.mostrar();
+            // var listaestatica = lista.aListaEstatica();
             // SalidaPorDefecto.consola("\nClase = "+listaestatica.getClass()+"\n");
             // listaestatica.mostrar();
 
         //Pasar a info estatica con argumentos
-            // ListaInfoEstatica listaEstatica = lista.aListaEstatica(listaPrueba);
+            // ListaInfoEstatica listaEstatica = new ListaInfoEstatica(3);
+            // SalidaPorDefecto.consola("Elementos a eliminar: \n");
+            // listaEstatica.insertar(2);
+            // listaEstatica.insertar(4);
+            // listaEstatica.insertar(6);
             // listaEstatica.mostrar();
+            // SalidaPorDefecto.consola("Lista dinamica:\n");
+            // lista.insertar(1);
+            // lista.insertar(2);
+            // lista.insertar(3);
+            // lista.insertar(4);
+            // lista.insertar(5);
+            // lista.insertar(6);
+            // lista.mostrar();
+            // SalidaPorDefecto.consola("\nA lista estatica:\n");
+            // var nuevaLista = lista.aListaEstatica(listaEstatica);
+            // nuevaLista.mostrar();
 
         //A MATRIZ 
-            // MatrizInfo2 m1 = lista.aMatrizInfo2(5,5);
-            // m1.imprimir();
+            // MatrizInfo2 matriz = lista.aMatrizInfo2(3,3);
+            // matriz.cambiar(0, 0, 1);
+            // matriz.cambiar(0, 1, 2);
+            // matriz.cambiar(0, 2, 3);
+            // matriz.cambiar(1, 0, 4);
+            // matriz.cambiar(1, 1, 5);
+            // matriz.cambiar(1, 2, 6);
+            // matriz.cambiar(2, 0, 7);
+            // matriz.cambiar(2, 1, 8);
+            // matriz.cambiar(2, 2, 9);
+            // SalidaPorDefecto.consola("Matriz\n");
+            // matriz.imprimir();
+            // SalidaPorDefecto.consola("\nlista dinamica con renglones de la matriz:\n");
+            // lista.agregarMatriz(matriz, TipoTabla.POR_RENGLON);
+            // lista.mostrar();
+            // SalidaPorDefecto.consola("\nlista dinamica con columnas de la matriz:\n");
+            // lista.vaciar();
+            // lista.agregarMatriz(matriz, TipoTabla.POR_COLUMNA);
+            // lista.mostrar();
 
         //AgregarLista
             // lista.agregarLista(listaPrueba);
@@ -96,16 +132,16 @@ public class PruebaListaInfoDinamica2 {
             // SalidaPorDefecto.consola("\nElemento en indice 2: "+lista.obtener(2));;
 
         //Es igual
-            lista.insertar(1);
-            lista.insertar(2);
-            lista.insertar(3);
-            lista2.insertar(2);
-            lista2.insertar(1);
-            lista2.insertar(3);
-            lista.mostrar();
-            SalidaPorDefecto.consola("\n");
-            lista2.mostrar();
-            SalidaPorDefecto.consola("\nSon iguales?: " + lista.esIgual(lista2));
+            // lista.insertar(1);
+            // lista.insertar(2);
+            // lista.insertar(3);
+            // lista2.insertar(2);
+            // lista2.insertar(1);
+            // lista2.insertar(3);
+            // lista.mostrar();
+            // SalidaPorDefecto.consola("\n");
+            // lista2.mostrar();
+            // SalidaPorDefecto.consola("\nSon iguales?: " + lista.esIgual(lista2));
 
         //Redimensionar
             // lista.insertar(1);

@@ -1,8 +1,6 @@
 package estructuraslineales;
 
-import java.beans.Transient;
-import java.util.LongSummaryStatistics;
-
+import utilerias.comunes.TipoTabla;
 import entradasalida.SalidaPorDefecto;
 import estructuraslineales.auxiliar.Nodo;
 import estructuraslineales.auxiliar.NodoBuscado;
@@ -274,6 +272,7 @@ public class ListaInfoDinamica implements ListaInfo{
     }
 
     private Nodo obtenDatoEspecifico(int indice){
+        //Metodo para obtener un nodo en especifico
         Nodo temporal = apuntadorInicial;
         int contador = 0;
         while (temporal != null && contador < indice) {
@@ -321,9 +320,16 @@ public class ListaInfoDinamica implements ListaInfo{
         return nuevaLista;
     }
 
-    // public ListaInfoEstatica aListaEstatica(ListaInfoEstatica elementosADescartar){
-
-    // }
+    public ListaInfoEstatica aListaEstatica(ListaInfoEstatica elementosADescartar){
+        for (int lugar = 0; lugar < elementosADescartar.CAPACIDAD; lugar++) {//Ciclo para eliminar los elementos de la lista actual
+            this.borrar(elementosADescartar.obtenerElemento(lugar));
+        }//Nueva lista para pasar la lista actual a estatica
+        ListaInfoEstatica listEst = new ListaInfoEstatica(this.obtenerCantidadDeElementos());
+        for (int index = 0; index < listEst.CAPACIDAD; index++) {//Ciclo para llenar la lista estatica con los elementos de la actual
+            listEst.insertar(this.obtenDatoEspecifico(index));
+        }
+        return listEst;
+    }
     
     public MatrizInfo2 aMatrizInfo2(int filas, int columnas){
         MatrizInfo2 matriz = new MatrizInfo2(filas, columnas);
@@ -393,15 +399,25 @@ public class ListaInfoDinamica implements ListaInfo{
         return copia;
     }
 
-    // public boolean agregarMatriz(MatrizInfo2 tabla, TipoTabla enumTipoTabla){
-    //     if (enumTipoTabla == TipoTabla.POR_COLUMNA) {
-            
-    //     }else if(enumTipoTabla == TipoTabla.POR_RENGLON){
-
-    //     }else{
-    //         return false;
-    //     }
-    // }
+    public boolean agregarMatriz(MatrizInfo2 tabla, TipoTabla enumTipoTabla){
+        if (enumTipoTabla == TipoTabla.POR_RENGLON) {//Se recorre la matriz completa para poner cada elemento en la lista
+            for (int fil = 0; fil < tabla.obtenerRenglones(); fil++) {
+                for (int col = 0; col < tabla.obtenerColumnas(); col++) {
+                    this.insertar(tabla.obtener(fil, col));
+                }
+            }
+            return true;
+        }else if(enumTipoTabla == TipoTabla.POR_COLUMNA){//Se hace lo mismo que el renglon
+            for (int fil = 0; fil < tabla.obtenerRenglones(); fil++) {
+                for (int col = 0; col < tabla.obtenerColumnas(); col++) {
+                    this.insertar(tabla.obtener(col, fil));//Invirtiendo la fila por la columna y viceversa
+                }
+            }
+            return true;
+        }else{//Hubo algun error
+            return false;
+        }
+    }
     
     @Override
     public void vaciar(){

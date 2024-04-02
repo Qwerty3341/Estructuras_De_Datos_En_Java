@@ -42,13 +42,7 @@ public class MatrizInfo2 {
     }
     
     public Object obtener(int fila, int col){
-        int filaMenosUno = fila -1;//Restamos el numero de filas ya que se cuentan desde 0
-        int colMenosUno = col -1;
-        if (filaMenosUno < this.filas && colMenosUno < this.columnas) {
-            return this.arreglo[filaMenosUno][colMenosUno];  
-        }else{
-            throw new IndexOutOfBoundsException("Out of bounds");
-        }
+        return this.arreglo[fila][col];  
     }
 
     public boolean cambiar(int fila, int col, Object valor){
@@ -61,27 +55,11 @@ public class MatrizInfo2 {
     }
 
     public int obtenerRenglones(){
-        int numDeElementos = 0;
-        for(int fil = 0; fil < this.filas; fil++){
-            for(int col = 0; col < this.columnas; col++){
-                if (this.arreglo[fil][col] != null) {
-                    numDeElementos = numDeElementos + 1;
-                }
-            }
-        }
-        return numDeElementos;
+        return this.filas;
     }
 
     public int obtenerColumnas(){
-        int numDeElementos = 0;
-        for (int col = 0; col < this.columnas; col++) {
-            for (int fil = 0; fil < this.filas; fil++) {
-                if (this.arreglo[fil][col] != null) {
-                    numDeElementos++;
-                }
-            }
-        }
-        return numDeElementos;        
+        return this.columnas;        
     }
 
     public void imprimirXRenglones(){
