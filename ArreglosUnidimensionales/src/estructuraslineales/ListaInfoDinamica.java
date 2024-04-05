@@ -283,7 +283,7 @@ public class ListaInfoDinamica implements ListaInfo{
     }
 
     public void mostrarOI(){
-        PilaInfoDinamica pila = new PilaInfoDinamica();
+        PilaInfoDinamica pila = new PilaInfoDinamica();//Pila para almacenar los datos de los nodos
         Nodo temporal = apuntadorInicial;
         while (temporal!=null) {
             pila.poner(temporal.getDato());
@@ -338,7 +338,7 @@ public class ListaInfoDinamica implements ListaInfo{
         int posicionDeFila = 0;
         int posicionDeColumna = 0;
         int posicionDeLista = 0;
-    
+        //Recorrer toda la matriz
         for (int index = 0; index < tamanio; index++) {
             for (int index2 = 0; index2 < columnas; index2++) {
                 if (posicionDeLista < tamanio) {
@@ -364,8 +364,7 @@ public class ListaInfoDinamica implements ListaInfo{
     }
     
     public boolean agregarLista(ListaInfo listaDatos2){
-        //Solamente se recorre la lista para obtener el elemento actual 
-        //y despues ponerlos en la lista actual
+        //Solamente se recorre la lista para obtener el elemento actual y despues ponerlos en la lista actual
         if(listaDatos2 instanceof ListaInfoDinamica){
             ListaInfoDinamica list = (ListaInfoDinamica) listaDatos2;
             for(int index=0; index < list.obtenerCantidadDeElementos(); index++){
@@ -373,7 +372,6 @@ public class ListaInfoDinamica implements ListaInfo{
                 this.insertar(objetoActual);
             }
             return true;
-
         }else if (listaDatos2 instanceof ListaInfoEstatica){
             ListaInfoEstatica list = (ListaInfoEstatica) listaDatos2;
             for(int index=0; index < list.capacidad(); index++){
@@ -381,18 +379,16 @@ public class ListaInfoDinamica implements ListaInfo{
                 this.insertar(objetoActual);
             }
             return true;
-
-        }else{
+        }else{//Se paso otro tipo de dato por argumento
             return false;
         }        
     }
 
     @Override
     public ListaInfo clonar(){
-        //Se llama clonar2 para evitar 
-        ListaInfoDinamica copia = new ListaInfoDinamica();
-        Nodo temp = this.apuntadorInicial;
-        while (temp != null) {
+        ListaInfoDinamica copia = new ListaInfoDinamica();//Se hace la nueva lista
+        Nodo temp = this.apuntadorInicial; 
+        while (temp != null) {//Recorremos toda la lista para agregar los nodos a la nueva listaS
             copia.insertar(temp);
             temp = temp.getEnlaceDerecho();
         }
@@ -426,7 +422,7 @@ public class ListaInfoDinamica implements ListaInfo{
 
     @Override
     public void rellenar(Object valor, int cantidad){
-        for (int cuenta = 0; cuenta < cantidad; cuenta++) {
+        for (int cuenta = 0; cuenta < cantidad; cuenta++) {//Usamos el metodo insertar varias veces
             this.insertar(valor);
         }
     }
@@ -457,8 +453,7 @@ public class ListaInfoDinamica implements ListaInfo{
         this.vaciar();
         //Coloco los elementos de la pila en la lista actual
         for (int posicion = 0; posicion < iteraciones ; posicion++) {
-            Object elementoTemporal = pilaDeRespaldo.quitar();
-            this.insertar(elementoTemporal);
+            this.insertar(pilaDeRespaldo.quitar());
         }
     }    
 

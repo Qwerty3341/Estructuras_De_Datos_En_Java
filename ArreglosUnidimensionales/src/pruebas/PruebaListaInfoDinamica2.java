@@ -12,12 +12,25 @@ public class PruebaListaInfoDinamica2 {
         ListaInfoDinamica lista2 = new ListaInfoDinamica();
 
         //Mostrar oi
+            // SalidaPorDefecto.consola("lista original\n");
+            // lista.insertar('A');
+            // lista.insertar('B');
+            // lista.insertar('C');
+            // lista.insertar('D');
+            // lista.mostrar();
+            // SalidaPorDefecto.consola("\nlista en orden inverso\n");
             // lista.mostrarOI();
         //encontrar lista 
-            // SalidaPorDefecto.consola("\nEncontrando lista del 2\n");
-            // ListaInfoDinamica lista2 = lista.encontrarLista(2);
+            // SalidaPorDefecto.consola("lista:\n");
+            // lista.insertar(1);
+            // lista.insertar(0);
+            // lista.insertar(1);
+            // lista.insertar(0);
+            // lista.insertar(0);
+            // lista.mostrar();
+            // SalidaPorDefecto.consola("\nEncontrando el 1\n");
+            // lista2 = lista.encontrarLista(1);
             // lista2.mostrar();
-            // SalidaPorDefecto.consola("\n");
         //Pasar a info estatica
             // lista.insertar('X');
             // lista.insertar('Y');
@@ -47,7 +60,17 @@ public class PruebaListaInfoDinamica2 {
             // var nuevaLista = lista.aListaEstatica(listaEstatica);
             // nuevaLista.mostrar();
 
-        //A MATRIZ 
+        //A matriz 
+            // lista.insertar('A');
+            // lista.insertar('B');
+            // lista.insertar('C');
+            // lista.insertar('D');
+            // lista.mostrar();
+            // SalidaPorDefecto.consola("\nPasandola a una matriz 4x4\n");
+            // MatrizInfo2 m = lista.aMatrizInfo2(4, 4);
+            // m.imprimir();
+
+        //A MATRIZ por columna y fila
             // MatrizInfo2 matriz = lista.aMatrizInfo2(3,3);
             // matriz.cambiar(0, 0, 1);
             // matriz.cambiar(0, 1, 2);
@@ -69,20 +92,53 @@ public class PruebaListaInfoDinamica2 {
             // lista.mostrar();
 
         //AgregarLista
-            // lista.agregarLista(listaPrueba);
+            // lista.insertar(23);
+            // lista.insertar(67);
+            // lista.insertar(91);
+            // lista.insertar(88);
+            // SalidaPorDefecto.consola("Lista 1:\n");
+            // lista.mostrar();
+            // SalidaPorDefecto.consola("\nLista 2:\n");
+            // lista2.insertar('A');
+            // lista2.insertar('F');
+            // lista2.insertar('H');
+            // lista2.insertar('P');
+            // lista2.mostrar();
+            // SalidaPorDefecto.consola("\nAgregando la lista 2 a la lista 1:\n");
+            // lista.agregarLista(lista2);
             // lista.mostrar();
         
         //Clonar
-            // var listaClon =lista.clonar();
-            // SalidaPorDefecto.consola("Clase="+listaClon.getClass()+"\n");
+            // lista.insertar(12.3);
+            // lista.insertar(-9);
+            // lista.insertar(90);
+            // SalidaPorDefecto.consola("Lista original:\n");
+            // lista.mostrar();
+            // var listaClon = lista.clonar();
+            // SalidaPorDefecto.consola("\nClase de la lista clonada = "+listaClon.getClass()+"\n");
             // listaClon.mostrar();
+            // SalidaPorDefecto.consola("\nLista 1 = "+lista+"\nLista 2 = "+lista2);
+
         //Vaciar
+            // lista.insertar(-33);
+            // lista.insertar(12);
+            // lista.insertar(999);
+            // lista.insertar(918);
+            // lista.insertar(5632);
+            // SalidaPorDefecto.consola("Lista:\n");
+            // lista.mostrar();
+            // SalidaPorDefecto.consola("\nVaciando la lista:\n");
             // lista.vaciar();
             // lista.mostrar();
+
         //Rellenar
             // ListaInfoDinamica listaVacia = new ListaInfoDinamica();
+            // SalidaPorDefecto.consola("Lista vacia:\n");
+            // listaVacia.mostrar();
+            // SalidaPorDefecto.consola("\nRellenando la lista con 5 Q:\n");
             // listaVacia.rellenar('Q', 5);       
             // listaVacia.mostrar();
+
         //Contar
             // lista.insertar(1);
             // lista.insertar(1);
@@ -95,9 +151,10 @@ public class PruebaListaInfoDinamica2 {
             // SalidaPorDefecto.consola("El 0 aparece "+lista.contar(0)+" veces\n");
         
         //Invertir
-            // lista.insertar('a');
-            // lista.insertar('b');
-            // lista.insertar('c');
+            // lista.insertar('A');
+            // lista.insertar('B');
+            // lista.insertar('C');
+            // lista.insertar('D');
             // lista.mostrar();
             // lista.invertir();
             // SalidaPorDefecto.consola("\nLista invertida:\n");
@@ -114,15 +171,15 @@ public class PruebaListaInfoDinamica2 {
             // lista.mostrar();
 
         //Cambiar indice en especifico
-            // lista.insertar('A');
-            // lista.insertar('B');
-            // lista.insertar('C');
-            // lista.insertar('D');
-            // lista.insertar('E');
-            // lista.mostrar();
-            // SalidaPorDefecto.consola("\nCambiando el indice 2 por 999\n");
-            // lista.cambiar(2, 999);
-            // lista.mostrar();
+            lista.insertar('A');
+            lista.insertar('B');
+            lista.insertar('C');
+            lista.insertar('D');
+            lista.insertar('E');
+            lista.mostrar();
+            SalidaPorDefecto.consola("\nCambiando el indice 2 por 8\n");
+            lista.cambiar(2, 8);
+            lista.mostrar();
         //Obtener
             // lista.insertar('H');
             // lista.insertar('O');

@@ -14,7 +14,7 @@ public class PilaInfoDinamica implements LoteInfo{
     @Override
     public boolean poner(Object valor) {
         int retorno = listaPila.insertar(valor);
-        if (retorno>=0) {
+        if (retorno>=0) {//Para saber si se agrego correctamente
             return true;    
         }else{
             return false;
@@ -46,7 +46,7 @@ public class PilaInfoDinamica implements LoteInfo{
     public Object verFinal() {
         if (vacio() == true) {
             return null;
-        }else{
+        }else{//Recorremos toda la lista
             Nodo iterador = listaPila.apuntadorInicial;
             while (iterador.getEnlaceDerecho() != null) {
                 iterador = iterador.getEnlaceDerecho();
@@ -59,6 +59,4 @@ public class PilaInfoDinamica implements LoteInfo{
     public void mostrar() {
         listaPila.mostrar();
     }
-
-
 }

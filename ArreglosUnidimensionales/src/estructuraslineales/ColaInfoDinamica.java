@@ -11,9 +11,9 @@ public class ColaInfoDinamica implements LoteInfo{
     }
 
     public Object obtener(int index) {
-        if (vacio()) { 
+        if (vacio()) {//Si esta vacia quiere decir que solo tiene el null final
             return null;
-        } else {
+        } else {//Se recorre la lista para obtener el dato del nodo indicado
             Nodo iterador = datos.apuntadorInicial;
             int contador = 0;
             while (iterador != null && contador < index) {
@@ -38,7 +38,7 @@ public class ColaInfoDinamica implements LoteInfo{
     public Object quitar() {
         if (vacio()) { 
             return null;
-        } else {
+        } else {//Como es una cola se quita el primer elemento que se puso y se recorren los demas
             Object dato = datos.apuntadorInicial.getDato(); 
             datos.apuntadorInicial = datos.apuntadorInicial.getEnlaceDerecho(); 
             return dato;
@@ -63,9 +63,9 @@ public class ColaInfoDinamica implements LoteInfo{
 
     @Override
     public Object verFinal() {
-        if (vacio() == true) {
+        if (vacio() == true) {//Si esta vacia es que solo tiene el null final
             return null;
-        }else{
+        }else{//Se recorre la lista para obtener el dato del nodo antes del null
             Nodo iterador = datos.apuntadorInicial;
             while (iterador.getEnlaceDerecho() != null) {
                 iterador = iterador.getEnlaceDerecho();
