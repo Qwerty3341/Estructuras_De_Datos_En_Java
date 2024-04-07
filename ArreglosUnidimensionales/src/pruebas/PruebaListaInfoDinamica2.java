@@ -171,15 +171,15 @@ public class PruebaListaInfoDinamica2 {
             // lista.mostrar();
 
         //Cambiar indice en especifico
-            lista.insertar('A');
-            lista.insertar('B');
-            lista.insertar('C');
-            lista.insertar('D');
-            lista.insertar('E');
-            lista.mostrar();
-            SalidaPorDefecto.consola("\nCambiando el indice 2 por 8\n");
-            lista.cambiar(2, 8);
-            lista.mostrar();
+            // lista.insertar('A');
+            // lista.insertar('B');
+            // lista.insertar('C');
+            // lista.insertar('D');
+            // lista.insertar('E');
+            // lista.mostrar();
+            // SalidaPorDefecto.consola("\nCambiando el indice 2 por 8\n");
+            // lista.cambiar(2, 8);
+            // lista.mostrar();
         //Obtener
             // lista.insertar('H');
             // lista.insertar('O');
@@ -224,23 +224,25 @@ public class PruebaListaInfoDinamica2 {
             // lista.insertar('A');
             // lista.insertar('B');
             // lista.insertar('C');
+            // lista.insertar('D');
+            // lista.insertar('E');
             // lista.mostrar();
-            // SalidaPorDefecto.consola("\nEliminando el indice 1\n");
-            // lista.borrar(1);
+            // SalidaPorDefecto.consola("\nEliminando el indice 2\n");
+            // lista.borrar(2);
             // lista.mostrar();
         
         //Borrar varios elementos (Object valor)
-            // lista.insertar('1');
-            // lista.insertar('1');
-            // lista.insertar('0');
-            // lista.insertar('0');
-            // lista.insertar('0');
-            // lista.insertar('1');
-            // lista.mostrar();
-            // SalidaPorDefecto.consola("\nBorrando el 0:\n");
-            // var borrados = lista.borrarVariosElementos('0');
-            // lista.mostrar();
-            // SalidaPorDefecto.consola("\nElementos borrados:\n");
-            // borrados.mostrar();
+            lista.insertar('1');
+            lista.insertar('1');
+            lista.insertar('0');
+            lista.insertar('0');
+            lista.insertar('0');
+            lista.insertar('1');
+            lista.mostrar();
+            SalidaPorDefecto.consola("\nBorrando el 0:\n");
+            var borrados = lista.borrarVariosElementos('0');
+            lista.mostrar();
+            SalidaPorDefecto.consola("\nElementos borrados:\n");
+            borrados.mostrar();
     }
 }
