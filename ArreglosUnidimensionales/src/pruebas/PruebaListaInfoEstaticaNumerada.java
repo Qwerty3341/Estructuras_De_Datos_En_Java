@@ -10,7 +10,7 @@ public class PruebaListaInfoEstaticaNumerada {
         ListaInfoEstaticaNumerica l1 = new ListaInfoEstaticaNumerica(2);
         ListaInfoEstaticaNumerica l2 = new ListaInfoEstaticaNumerica(2);
         //ListaInfoEstaticaNumerica l3 = new ListaInfoEstaticaNumerica(2);
-        //ListaInfoEstatica l4 = new ListaInfoEstatica(2);
+        //ListaInfoEstatica l4 = new `ListaInfoEstatica(2);
 
         // l1.insertar(-3);
         // l1.insertar(5);
