@@ -8,7 +8,7 @@ public class ArchivoTexto {
     public static ListaInfoEstatica leer(String archivo){
         FileReader input=null;
         int registro=0;
-        ListaInfoEstatica datos=null;
+        ListaInfoEstatica datos = null;
         BufferedReader buffer = null;
 
         try {
