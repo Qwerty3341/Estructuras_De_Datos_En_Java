@@ -17,21 +17,24 @@ public class MenuDeAnalizar {
 
     private static void Menu() {
         SalidaPorDefecto.consola("""
-                \n\nEntrada para el programa:
-                1 -> Programa de java
-                2 -> Expresion aritmetica
-                3 -> Salir
+            \n__________________________________________________________________________________________________________
+            Elige una opcion:
+            1 -> Programa de java
+            2 -> Expresion aritmetica
+            3 -> Salir
                 """);
 
         opcion = EntradaPorDefecto.consolaInt();
         switch (opcion) {
             case 1:
+                SalidaPorDefecto.consola("Coloca el nombre del archivo: ");
                 String nombreDeArchivo = EntradaPorDefecto.consolaCadenas();
                 ListaInfoEstatica archivo = ArchivoTexto.leer(nombreDeArchivo);
-                SalidaPorDefecto.consola("Código:\n");
-                var cadena = Analizador.validarArchivoDeJava(archivo);
-                if (cadena == true) SalidaPorDefecto.consola("Balanceado");
-                else SalidaPorDefecto.consola("Desbalanceado");
+                var resultado1 = Analizador.validarArchivoDeJava(archivo);
+                SalidaPorDefecto.consola("\nEstado : ");
+                if (resultado1) SalidaPorDefecto.consola("Archivo balanceado correctamente.");
+                else SalidaPorDefecto.consola("El archivo está desbalanceado.");
+                
                 break;
             case 2:
                 SalidaPorDefecto.consola("Coloca una expresión aritmética:\n");
