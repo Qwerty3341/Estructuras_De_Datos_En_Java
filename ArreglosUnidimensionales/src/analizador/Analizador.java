@@ -110,16 +110,17 @@ public class Analizador {
         // Indicar errores
         if (pilaDeIndices.vacio() == false) {
             PilaInfoEstatica pilaDeErrores = new PilaInfoEstatica(lineasDelArchivo.cantidad());
-            while(pilaDeIndices.vacio() == false){
-                pilaDeErrores.poner((int)pilaDeIndices.quitar());
+            while (pilaDeIndices.vacio() == false) {
+                pilaDeErrores.poner((int) pilaDeIndices.quitar());
             }
-            
-            for ( int lin = 0; lin < lineasDelArchivo.capacidad() ; lin++){
+
+            for (int lin = 0; lin < lineasDelArchivo.capacidad(); lin++) {
                 Object linea = lineasDelArchivo.obtener(lin);
                 if (pilaDeErrores.vacio() == false) {
                     int indice = (int) pilaDeErrores.quitar();
                     char tipoLlave;
-                    switch (((String) linea).charAt(indice)) {
+                    char caracterActual = ((String) linea).charAt(indice);
+                    switch (caracterActual) {
                         case '(':
                             tipoLlave = '(';
                             break;
@@ -129,12 +130,21 @@ public class Analizador {
                         case '{':
                             tipoLlave = '{';
                             break;
+                        // case '/':
+                        //     tipoLlave = "/*";
+                        //     if (indice + 1 < ((String) linea).length()) {
+                        //         char siguienteCaracter = ((String) linea).charAt(indice + 1);
+                        //         if (siguienteCaracter == '*') {
+                        //             tipoLlave = "*/";
+                        //         }
+                        //     }
+                        //     break;
                         default:
-                            tipoLlave = '?'; // Carácter desconocido
+                            tipoLlave = '?';
                             break;
                     }
-                    SalidaPorDefecto.consola("\n" + linea + "\n");
-                    SalidaPorDefecto.consola(indicarError(indice, tipoLlave));
+                    SalidaPorDefecto.consola("\nLinea "+ lin +"|\t"+linea + "\n");
+                    SalidaPorDefecto.consola("Error  |\t"+indicarError(indice, tipoLlave));
                 } else {
                     break;
                 }
@@ -143,12 +153,12 @@ public class Analizador {
         return pilaDeValidacion.vacio();
     }
 
-    private static String indicarError(int rango, char tipoLlave){
+    private static String indicarError(int rango, char tipoLlave) {
         String error = "";
         for (int index = 0; index < rango; index++) {
-            error+=" ";
+            error += " ";
         }
-        error+="^ Falta cerrar "+tipoLlave;
+        error += "^ Falta cerrar " + tipoLlave;
         return error;
     }
 }
