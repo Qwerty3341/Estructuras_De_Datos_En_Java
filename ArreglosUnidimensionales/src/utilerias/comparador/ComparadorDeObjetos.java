@@ -10,6 +10,9 @@ public class ComparadorDeObjetos {
         if(primerElemento instanceof Number && segundoElemento instanceof Number) {
             return compararNumeros(primerElemento, segundoElemento);
         }
+        if (primerElemento instanceof Character && segundoElemento instanceof Character) {
+            return compararChars(primerElemento, segundoElemento);
+        }
         else{
             return compararNull(primerElemento, segundoElemento);
         }
@@ -20,6 +23,18 @@ public class ComparadorDeObjetos {
         String stringA = (String) primerElemento;//Aqui solamente nos aseguramos de que los elementos sean strings
         String stringB = (String) segundoElemento;
         return stringA.compareTo(stringB);    
+    }
+
+    private static int compararChars(Object primerElemento, Object segundoElemento){
+        Character charA = (Character) primerElemento;
+        Character charB = (Character) segundoElemento;
+        if (charA > charB){
+            return 1;
+        }else if(charA < charB){
+            return -1;
+        }else{
+            return 0;
+        }
     }
 
     private static int compararNumeros(Object primerElemento, Object segundoElemento){

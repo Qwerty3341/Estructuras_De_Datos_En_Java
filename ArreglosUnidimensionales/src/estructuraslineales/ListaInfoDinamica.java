@@ -260,7 +260,7 @@ public class ListaInfoDinamica implements ListaInfo{
 
     //Metodos de la practica 12
 
-    private int obtenerCantidadDeElementos(){
+    protected int obtenerCantidadDeElementos(){
         //Metodo para usarlo en tamanios de las listas estaticas
         int cantidad = 0;
         Nodo temp = this.apuntadorInicial;
@@ -621,7 +621,7 @@ public class ListaInfoDinamica implements ListaInfo{
         return elementoEnElIndice;
     }
 
-    public ListaInfoDinamica borrarVariosElementos(Object valor){
+    public ListaInfoDinamica borrarV(Object valor){
         ListaInfoDinamica elementosBorrados = new ListaInfoDinamica();
         ColaInfoDinamica colaDeAlmacen = new ColaInfoDinamica();//Esta cola es para poner los elementos eliminados
         int tamanioOriginal = this.obtenerCantidadDeElementos();//Esta variable me ayuda a saber el tamanio que va a tener la lista despues de eliminar los elementos
