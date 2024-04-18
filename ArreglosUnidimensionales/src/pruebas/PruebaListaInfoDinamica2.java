@@ -232,17 +232,17 @@ public class PruebaListaInfoDinamica2 {
             // lista.mostrar();
         
         //Borrar varios elementos (Object valor)
-            lista.insertar('1');
-            lista.insertar('1');
-            lista.insertar('0');
-            lista.insertar('0');
-            lista.insertar('0');
-            lista.insertar('1');
-            lista.mostrar();
-            SalidaPorDefecto.consola("\nBorrando el 0:\n");
-            var borrados = lista.borrarVariosElementos('0');
-            lista.mostrar();
-            SalidaPorDefecto.consola("\nElementos borrados:\n");
-            borrados.mostrar();
+            // lista.insertar('1');
+            // lista.insertar('1');
+            // lista.insertar('0');
+            // lista.insertar('0');
+            // lista.insertar('0');
+            // lista.insertar('1');
+            // lista.mostrar();
+            // SalidaPorDefecto.consola("\nBorrando el 0:\n");
+            // var borrados = lista.borrarVariosElementos('0');
+            // lista.mostrar();
+            // SalidaPorDefecto.consola("\nElementos borrados:\n");
+            // borrados.mostrar();
     }
 }

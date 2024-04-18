@@ -12,8 +12,7 @@ public class PruebaListaInfoDinamicaOrdenada {
         ListaInfoDinamicaOrdenada lista1 = new ListaInfoDinamicaOrdenada(TipoDeOrdenamiento.INC);
         ListaInfoDinamicaOrdenada lista2 = new ListaInfoDinamicaOrdenada(TipoDeOrdenamiento.DEC);
         // Insertar
-            // SalidaPorDefecto.consola("""
-            // Insertando 1, 55, 10, 4 y 414""");
+            // SalidaPorDefecto.consola("Insertando 1, 55, 10, 4 y 414\n");
             // lista1.insertar(-1);
             // lista1.insertar(55);
             // lista1.insertar(10);
@@ -24,8 +23,14 @@ public class PruebaListaInfoDinamicaOrdenada {
             // SalidaPorDefecto.consola("\nMetodo imprimir reverso\n");
             // lista1.imprimirReverso();
 
-        //Insertando de forma decresiente 
-            // SalidaPorDefecto.consola("Insertando letras de forma decresiente\n");
+        //Insertando decreciente
+            // SalidaPorDefecto.consola("Insertando letras de forma incremental y decremental\n");
+            // lista1.insertar('W');
+            // lista1.insertar('X');
+            // lista1.insertar('A');
+            // lista1.insertar('B');
+            // lista1.imprimirNatural();
+            // SalidaPorDefecto.consola("\n");
             // lista2.insertar('W');
             // lista2.insertar('X');
             // lista2.insertar('A');
@@ -33,13 +38,13 @@ public class PruebaListaInfoDinamicaOrdenada {
             // lista2.imprimirNatural();
 
         //Buscar
-            lista1.insertar(1);
-            lista1.insertar(55);
-            lista1.insertar(10);
-            lista1.insertar(4);
-            lista1.insertar(414);
-            SalidaPorDefecto.consola("\nBuscando el 10 asendente\n");
-            SalidaPorDefecto.consola("Esta en el indice: "+lista1.buscarOrdenada(10));
+            // lista1.insertar(1);
+            // lista1.insertar(55);
+            // lista1.insertar(10);
+            // lista1.insertar(4);
+            // lista1.insertar(414);
+            // SalidaPorDefecto.consola("\nBuscando el 10\n");
+            // SalidaPorDefecto.consola("Esta en el indice: "+lista1.buscarOrdenada(10));
 
         // Eliminar
             // lista1.insertar(1);
@@ -48,7 +53,8 @@ public class PruebaListaInfoDinamicaOrdenada {
             // lista1.insertar(4);
             // lista1.insertar(414);
             // lista1.mostrar();
-            // SalidaPorDefecto.consola("\nEliminando el elemento "+ lista1.eliminar(55)+"\n");
+            // SalidaPorDefecto.consola("\nEliminando el elemento 55\n");
+            // lista1.eliminar(55);
             // lista1.mostrar();
 
         // Insertar final
@@ -73,7 +79,8 @@ public class PruebaListaInfoDinamicaOrdenada {
             // lista2.insertar('C');
             // SalidaPorDefecto.consola("Lista original:\n");
             // lista2.imprimirNatural();
-            // SalidaPorDefecto.consola("\nEliminando el final = "+lista2.eliminarFinal() + "\n");
+            // SalidaPorDefecto.consola("\nEliminando el final\n");
+            // lista2.eliminarFinal();
             // lista2.imprimirNatural();
 
         // Eliminar al inicio
@@ -161,8 +168,6 @@ public class PruebaListaInfoDinamicaOrdenada {
             SalidaPorDefecto.consola("\nEliminando el 1 y colocando el 1.5\n");
             lista1.reacomodar(1, 1.5);
             lista1.imprimirNatural();
-
-
     }
 
 }

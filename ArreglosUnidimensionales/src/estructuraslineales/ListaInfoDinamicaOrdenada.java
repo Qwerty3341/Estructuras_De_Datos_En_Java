@@ -201,7 +201,7 @@ public class ListaInfoDinamicaOrdenada extends ListaInfoDinamica {
 
     public void eliminarMatriz(MatrizInfo2 matriz) {
         for (int renglon = 0; renglon < matriz.obtenerRenglones(); renglon++) {
-            for (int columna = 0; columna < matriz.obtenerColumnas(); columna++) {
+            for (int columna = 0; columna < matriz.obtenerColumnas(); columna++) {//Usamos dos for
                 Object objetoActual = matriz.obtener(renglon, columna);
                 this.borrarV(objetoActual);
             }
