@@ -33,13 +33,13 @@ public class PruebaListaInfoDinamicaOrdenada {
             // lista2.imprimirNatural();
 
         //Buscar
-            // lista1.insertar(1);
-            // lista1.insertar(55);
-            // lista1.insertar(10);
-            // lista1.insertar(4);
-            // lista1.insertar(414);
-            // SalidaPorDefecto.consola("\nBuscando el 10 asendente\n");
-            // SalidaPorDefecto.consola("Esta en el indice: "+lista1.buscarOrdenada(10));
+            lista1.insertar(1);
+            lista1.insertar(55);
+            lista1.insertar(10);
+            lista1.insertar(4);
+            lista1.insertar(414);
+            SalidaPorDefecto.consola("\nBuscando el 10 asendente\n");
+            SalidaPorDefecto.consola("Esta en el indice: "+lista1.buscarOrdenada(10));
 
         // Eliminar
             // lista1.insertar(1);

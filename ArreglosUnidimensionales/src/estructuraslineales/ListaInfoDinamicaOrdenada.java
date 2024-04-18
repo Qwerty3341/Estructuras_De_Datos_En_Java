@@ -210,7 +210,7 @@ public class ListaInfoDinamicaOrdenada extends ListaInfoDinamica {
 
     public void reacomodar(Object elementoViejo, Object elementoNuevo){
         Nodo temp = apuntadorInicial;
-        while (temp != null) {
+        while (temp != null) {//Si hay un elemento igual al viejo lo sustituimos por el nuevo
             if (temp.getDato().equals(elementoViejo)) {
                 this.borrar(temp.getDato());
                 this.insertar(elementoNuevo);
@@ -219,8 +219,6 @@ public class ListaInfoDinamicaOrdenada extends ListaInfoDinamica {
         }
         
     }
-
-
 
     //Otros metodos...
     @Override
