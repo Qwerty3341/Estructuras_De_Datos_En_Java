@@ -19,6 +19,13 @@ public class PruebaListaInfoDinamicaClave {
             // listaCV.insertar("F",99);
             // listaCV.mostrar();
 
+        //Ver si esta vacio
+            // listaCV.insertar("A", -22);
+            // listaCV.insertar("B", 67);
+            // listaCV.insertar("F", 2);
+            // listaCV.mostrar();
+            // SalidaPorDefecto.consola("\nEsta lista esta vacia? = "+listaCV.vacia());
+
         //Borrar
             // listaCV.insertar("A", 1);
             // listaCV.insertar("B", 2);
@@ -109,6 +116,7 @@ public class PruebaListaInfoDinamicaClave {
             // SalidaPorDefecto.consola("\nLista de valores\n");
             // var l_2 = (ListaInfoDinamica) l.obtener(1);
             // l_2.mostrar();
+
         //A matriz
             // listaCV.insertar("X",-1);
             // listaCV.insertar("Y",0);
@@ -148,6 +156,7 @@ public class PruebaListaInfoDinamicaClave {
             // listaCV.agregarLista(l);
             // SalidaPorDefecto.consola("\nResultado:\n");
             // listaCV.mostrar();
+
         //AgregarListas estaticas
             // ListaInfoEstatica cla = new ListaInfoEstatica(2);
             // SalidaPorDefecto.consola("Claves\n");
@@ -162,6 +171,14 @@ public class PruebaListaInfoDinamicaClave {
             // SalidaPorDefecto.consola("Resultado\n");
             // listaCV.agregarListasEstaticas(cla, val);
             // listaCV.mostrar();
+
+            //Cantidad
+                // listaCV.insertar("90",1);
+                // listaCV.insertar("32",5);
+                // listaCV.insertar("567",1.45e9);
+                // listaCV.mostrar();
+                // SalidaPorDefecto.consola("\nTamanio de la lista = "+listaCV.cantidad());
+
             //AgregarListas dinamicas
                 // ListaInfoDinamica cla = new ListaInfoDinamica();
                 // SalidaPorDefecto.consola("Claves\n");
@@ -176,6 +193,7 @@ public class PruebaListaInfoDinamicaClave {
                 // SalidaPorDefecto.consola("Resultado\n");
                 // listaCV.agregarListasDinamicas(cla, val);
                 // listaCV.mostrar();
+
             //Agregar matriz
                 // MatrizInfo2 m = new MatrizInfo2(2, 2);
                 // m.cambiar(0, 0, "t");

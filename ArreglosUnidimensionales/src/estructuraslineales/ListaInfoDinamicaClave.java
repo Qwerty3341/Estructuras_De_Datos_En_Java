@@ -85,7 +85,6 @@ public class ListaInfoDinamicaClave implements ListaInfo {
         busqueda.setBuscado(temp);
         busqueda.setAnterior(anterior);
         return busqueda;
-
     }
 
     public Object borrarContenido(Object valor) {
@@ -185,8 +184,7 @@ public class ListaInfoDinamicaClave implements ListaInfo {
     }
 
     public ListaInfoEstatica aListasEstaticas() {
-        ListaInfoEstatica listas = new ListaInfoEstatica(2);// Tamanio 2 ya que es para la lista de claves y la de
-                                                            // valores
+        ListaInfoEstatica listas = new ListaInfoEstatica(2);// Tamanio 2 ya que es para la lista de claves y la de valores
         ListaInfoEstatica listaDeClaves = new ListaInfoEstatica(this.calcularTamanio());
         ListaInfoEstatica listaDeValores = new ListaInfoEstatica(this.calcularTamanio());
         // Obteniendo las claves
@@ -208,8 +206,7 @@ public class ListaInfoDinamicaClave implements ListaInfo {
     }
 
     public ListaInfoDinamica aListasDinamicas() {
-        ListaInfoDinamica listas = new ListaInfoDinamica();// Tamanio 2 ya que es para la lista de claves y la de
-                                                           // valores
+        ListaInfoDinamica listas = new ListaInfoDinamica();// Tamanio 2 ya que es para la lista de claves y la de valores
         ListaInfoDinamica listaDeClaves = new ListaInfoDinamica();
         ListaInfoDinamica listaDeValores = new ListaInfoDinamica();
         // Obteniendo las claves
@@ -233,11 +230,6 @@ public class ListaInfoDinamicaClave implements ListaInfo {
     public MatrizInfo2 aMatriz2() {
         int renglones = this.calcularTamanio();
         MatrizInfo2 matriz = new MatrizInfo2(renglones, 2);// Solo son dos columnas ya que son solo para clave y valor
-        // Pasandola a lista dinamica podemos acceder a las claves y valores
-        // ListaInfoDinamica repuesto = (ListaInfoDinamica) this.aListasDinamicas();
-        // ListaInfoDinamica claves = (ListaInfoDinamica) repuesto.obtener(0);
-        // ListaInfoDinamica valores = (ListaInfoDinamica) repuesto.obtener(1);
-        // Insertando las claves y valores
         NodoClaveValor actual = apuntadorInicial;
         int fila = 0;
         while (actual != null && fila < renglones) {
@@ -324,8 +316,7 @@ public class ListaInfoDinamicaClave implements ListaInfo {
     }
 
     public boolean agregarMatriz2(MatrizInfo2 matriz) {
-        // Validar que la matriz tenga exactamente dos columnas
-        if (matriz.obtenerColumnas() != 2) {
+        if (matriz.obtenerColumnas() != 2) {// Validar que la matriz tenga exactamente dos columnas
             return false;
         }
         // Pasamos la matriz a lista dinamica
@@ -335,7 +326,7 @@ public class ListaInfoDinamicaClave implements ListaInfo {
                 elementosDeLaMatriz.insertar(matriz.obtener(fil, col));
             }
         }
-        //Recorremos de dos en dos para obtener de dos en dos los elementos de la matriz
+        // Recorremos de dos en dos para obtener de dos en dos los elementos de la matriz
         for (int contador = 0; contador < elementosDeLaMatriz.obtenerCantidadDeElementos(); contador += 2) {
             Object claveActual = elementosDeLaMatriz.obtener(contador);
             Object valorActual = elementosDeLaMatriz.obtener(contador + 1);
@@ -349,7 +340,7 @@ public class ListaInfoDinamicaClave implements ListaInfo {
         return true;
     }
 
-    /*
+    /*___________________________________________________________________________________-
      * Metodos de lista info
      */
     @Override
