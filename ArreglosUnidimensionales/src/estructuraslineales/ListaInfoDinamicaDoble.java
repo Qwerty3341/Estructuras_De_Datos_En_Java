@@ -22,9 +22,9 @@ public class ListaInfoDinamicaDoble  {
                 apuntadorFinal=nodoNuevo;
             }else{//hay uno o varios
                 //paso 2
-                nodoNuevo.setEnlaceIzquierdo(apuntadorFinal);
+                nodoNuevo.setEnlaceIzq(apuntadorFinal);
                 //paso 3
-                apuntadorFinal.setEnlaceDerecho(nodoNuevo);
+                apuntadorFinal.setEnlaceDer(nodoNuevo);
                 //paso 4
                 apuntadorFinal=nodoNuevo;
             }

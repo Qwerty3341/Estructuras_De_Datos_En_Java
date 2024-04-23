@@ -1,15 +1,15 @@
 package estructuraslineales.auxiliar;
 
 public class NodoDoble {
-
     protected Object dato;
-    protected NodoDoble enlaceIzquierdo;
-    protected NodoDoble enlaceDerecho;
+    protected NodoDoble enlaceDer;
+    protected NodoDoble enlaceIzq;
+
 
     public NodoDoble(Object valor){
-        this.dato = valor;
-        this.enlaceDerecho = null;
-        this.enlaceDerecho = null;
+        dato = valor;
+        enlaceDer = null;
+        enlaceIzq = null;
     }
 
     public Object getDato() {
@@ -20,24 +20,26 @@ public class NodoDoble {
         this.dato = dato;
     }
 
-    public NodoDoble getEnlaceIzquierdo() {
-        return enlaceIzquierdo;
+    public NodoDoble getEnlaceDer() {
+        return enlaceDer;
     }
 
-    public void setEnlaceIzquierdo(NodoDoble enlaceIzquierdo) {
-        this.enlaceIzquierdo = enlaceIzquierdo;
+    public void setEnlaceDer(NodoDoble enlaceDer) {
+        this.enlaceDer = enlaceDer;
     }
 
-    public NodoDoble getEnlaceDerecho() {
-        return enlaceDerecho;
+    public NodoDoble getEnlaceIzq() {
+        return enlaceIzq;
     }
 
-    public void setEnlaceDerecho(NodoDoble enlaceDerecho) {
-        this.enlaceDerecho = enlaceDerecho;
+    public void setEnlaceIzq(NodoDoble enlaceIzq) {
+        this.enlaceIzq = enlaceIzq;
     }
 
     @Override
-    public String toString() {
+    public String toString(){
         return dato.toString();
+
     }
+    
 }
