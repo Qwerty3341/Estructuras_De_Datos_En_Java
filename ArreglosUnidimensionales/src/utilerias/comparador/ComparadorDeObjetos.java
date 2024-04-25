@@ -22,7 +22,7 @@ public class ComparadorDeObjetos {
     private static int compararStrings(Object primerElemento, Object segundoElemento){
         String stringA = (String) primerElemento;//Aqui solamente nos aseguramos de que los elementos sean strings
         String stringB = (String) segundoElemento;
-        return stringA.compareTo(stringB);    
+        return stringA.compareToIgnoreCase(stringB);    
     }
 
     private static int compararChars(Object primerElemento, Object segundoElemento){
