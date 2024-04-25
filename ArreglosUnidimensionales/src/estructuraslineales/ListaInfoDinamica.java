@@ -260,7 +260,7 @@ public class ListaInfoDinamica implements ListaInfo{
 
     //Metodos de la practica 12
 
-    protected int obtenerCantidadDeElementos(){
+    public int obtenerCantidadDeElementos(){
         //Metodo para usarlo en tamanios de las listas estaticas
         int cantidad = 0;
         Nodo temp = this.apuntadorInicial;
@@ -643,4 +643,9 @@ public class ListaInfoDinamica implements ListaInfo{
         }
         return elementosBorrados;        
     }
+
+    public Nodo getApuntadorInicial() {
+        return apuntadorInicial;
+    }
+    
 }

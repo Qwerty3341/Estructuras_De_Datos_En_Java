@@ -397,7 +397,7 @@ public class ListaInfoDinamicaOrdenada extends ListaInfoDinamica {
     }
 
     @Override
-    protected int obtenerCantidadDeElementos() {
+    public int obtenerCantidadDeElementos() {
         return super.obtenerCantidadDeElementos();
     }
 
