@@ -88,7 +88,6 @@ public class ListaInfoDinamica implements ListaInfo{
 
     public Object encontrar(Object valor) {
         NodoBuscado busqueda = encontrarNodo(valor);
-
         if(busqueda.getBuscado() != null){//Hay algo 
             return busqueda.getBuscado().getDato();
         }else{//No hay nada o no esta 
@@ -101,7 +100,7 @@ public class ListaInfoDinamica implements ListaInfo{
         NodoBuscado busqueda = encontrarNodo(valor);
         if (busqueda.getBuscado()==null) {//a) , d) no esta, ya sea por vacia o por que no existe el elemento
             return null;
-        }else{ //Si hay el eelemento buscado
+        }else{ //Si hay el elemento buscado
             //paso 1
             Object respaldo = busqueda.getBuscado().getDato();
             if (apuntadorInicial == apuntadorFinal) { //b) unico
