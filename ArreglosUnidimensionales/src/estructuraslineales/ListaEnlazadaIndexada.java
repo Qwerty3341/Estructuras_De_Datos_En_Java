@@ -98,6 +98,7 @@ public class ListaEnlazadaIndexada{
     public void borrarIndice(int indice) {
         apuntadorInicial = eliminarRecursivo(apuntadorInicial, indice, 0);
     }
+    
     private NodoIndiceObjecto eliminarRecursivo(NodoIndiceObjecto actual, int indiceBuscado, int indiceActual) {
         if (actual == null) {
             return null;

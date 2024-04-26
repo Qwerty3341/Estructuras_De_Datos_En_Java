@@ -23,9 +23,9 @@ public class Polinomio {
         if (indice >= monomios.obtenerCantidadDeElementos()) {
             return 0;  // Caso base: si el índice es igual al tamaño de la lista, retorna 0
         } else {
-            Monomio monomio = (Monomio) monomios.obtener(indice);  // Obtiene el monomio en la posición 'indice'
+            Monomio monomio = (Monomio) monomios.obtener(indice);  // Obtiene el monomio 
             double resultMonomio = monomio.getCoeficiente() * monomio.elevar(x, monomio.getPotenciaX()) * monomio.elevar(y, monomio.getPotenciaY());
-            return resultMonomio + evaluarRecursivo(x, y, indice + 1);  // Recursivamente suma el resultado del monomio actual y los siguientes
+            return resultMonomio + evaluarRecursivo(x, y, indice + 1);  // Sumamos el resultado del monomio actual y los siguientes
         }
     }
 
