@@ -101,7 +101,6 @@ public class GrafoEstatico {
         }
     }
 
-
     /*  1) Calcular incidencias
     Metodo que devuelve una celda de la matriz (adyacencia)*/
     private Double adyacencia(int origen, int destino) {

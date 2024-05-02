@@ -270,7 +270,7 @@ public class ListaInfoDinamica implements ListaInfo{
         return cantidad;
     }
 
-    private Nodo obtenDatoEspecifico(int indice){
+    public Nodo obtenDatoEspecifico(int indice){
         //Metodo para obtener un nodo en especifico
         Nodo temporal = apuntadorInicial;
         int contador = 0;

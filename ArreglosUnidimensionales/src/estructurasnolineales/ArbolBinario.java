@@ -2,6 +2,10 @@ package estructurasnolineales;
 
 import entradasalida.EntradaPorDefecto;
 import entradasalida.SalidaPorDefecto;
+import estructuraslineales.ListaInfo;
+import estructuraslineales.ListaInfoDinamica;
+import estructuraslineales.ListaInfoEstatica;
+import estructuraslineales.auxiliar.Nodo;
 import estructuraslineales.auxiliar.NodoDoble;
 
 
@@ -24,39 +28,32 @@ public class ArbolBinario {
         }
     }
 
-    private void nuevoArbol(NodoDoble subRaiz){
-        // Preguntar si hay hijo izquierdo
-        SalidaPorDefecto.consola("¿ El nodo " +subRaiz.getDato() + " tiene hijo izquierdo? [S/N]");
+    public void nuevoArbol(NodoDoble subRaiz) {
+        if (subRaiz == null) {
+            return; // Si el subRaíz es nulo, termina la ejecución para evitar NullPointerException.
+        }
+    
+        SalidaPorDefecto.consola("¿El nodo " + subRaiz.getDato() + " tiene hijo izquierdo? [S/N]: ");
         String respuestaHI = EntradaPorDefecto.consolaCadenas();
-        if(respuestaHI.equalsIgnoreCase("s")){
-            //Creamos un hijo izquierdo
-            SalidaPorDefecto.consola("Dame el valor del hijo izquierdo de "+ subRaiz.getDato());
+        if ("S".equalsIgnoreCase(respuestaHI)) {
+            SalidaPorDefecto.consola("Dame el valor del hijo izquierdo de " + subRaiz.getDato()+": ");
             String valorHi = EntradaPorDefecto.consolaCadenas();
             NodoDoble hijoIzquierdo = new NodoDoble(valorHi);
-            if(hijoIzquierdo != null){
-                subRaiz.setEnlaceIzq(hijoIzquierdo);
-                nuevoArbol(subRaiz.getEnlaceIzq()); // crearemos un arbol con esta subraiz como base
-            }
+            subRaiz.setEnlaceIzq(hijoIzquierdo);
+            nuevoArbol(hijoIzquierdo);  // Llama recursivamente para crear el subárbol izquierdo
         }
-
-        
-        // Preguntar si hay hijo derecho
-        SalidaPorDefecto.consola("¿ El nodo " +subRaiz.getDato() + " tiene hijo derecho? [S/N]");
+    
+        SalidaPorDefecto.consola("¿El nodo " + subRaiz.getDato() + " tiene hijo derecho? [S/N]: ");
         String respuestaHD = EntradaPorDefecto.consolaCadenas();
-        if(respuestaHD.equalsIgnoreCase("s")){
-            //Creamos un hijo derecho
-            SalidaPorDefecto.consola("Dame el valor del hijo derecho de "+ subRaiz.getDato());
+        if ("S".equalsIgnoreCase(respuestaHD)) {
+            SalidaPorDefecto.consola("Dame el valor del hijo derecho de " + subRaiz.getDato()+": ");
             String valorHD = EntradaPorDefecto.consolaCadenas();
             NodoDoble hijoDerecho = new NodoDoble(valorHD);
-            if(hijoDerecho != null){
-                subRaiz.setEnlaceIzq(hijoDerecho);
-                nuevoArbol(subRaiz.getEnlaceDer()); // crearemos un arbol con esta subraiz como base
-            }
+            subRaiz.setEnlaceDer(hijoDerecho);
+            nuevoArbol(hijoDerecho);  // Llama recursivamente para crear el subárbol derecho
         }
-        
     }
-
-
+    
     public void preorden(){
         preorden(raiz);
     }
@@ -96,6 +93,133 @@ public class ArbolBinario {
         } // el caso base es cuando subraiz es null
     }
 
+    //Metodos de la practica 16
 
+    public int obtenerAltura(){
+        return calcularAltura(this.raiz);
+    }
+
+    private int calcularAltura(NodoDoble nodo){
+        if (nodo == null) {
+            return 0;
+        }else{
+            int izq = calcularAltura(nodo.getEnlaceIzq());
+            int der = calcularAltura(nodo.getEnlaceDer());
+            int mayor;
+            if (izq > der) {//Vemos cual es el mayor
+                mayor = izq;
+            }else{
+                mayor = der;
+            }
+            return mayor+1;
+        }
+    }
     
+    public int buscarNivelDeNodo(Object valor){
+        return buscarNivelDeNodo(this.raiz, valor, 1);
+    }
+    
+    private int buscarNivelDeNodo(NodoDoble nodo, Object valor, int nivelActual){
+        if (nodo == null) {
+            return 0;  // El nodo no existe en el árbol.
+        } else if (nodo.getDato().equals(valor)) {
+            return nivelActual; 
+        } else {
+            int nivelIzquierdo = buscarNivelDeNodo(nodo.getEnlaceIzq(), valor, nivelActual + 1);
+            if (nivelIzquierdo != 0) {
+                return nivelIzquierdo; 
+            }
+            return buscarNivelDeNodo(nodo.getEnlaceDer(), valor, nivelActual + 1);
+        }
+    }
+    
+    public void contarNodosPorNivel() {
+        ListaInfoDinamica conteoPorNivel = new ListaInfoDinamica();
+        contarNodosPorNivel(raiz, 0, conteoPorNivel);
+        Nodo actual = conteoPorNivel.getApuntadorInicial();// Iterar sobre la lista para imprimir los resultados
+        int nivel = 1;
+        while (actual != null) {
+            SalidaPorDefecto.consola("Nivel " + nivel + ": " + actual.getDato() + "\n");
+            actual = actual.getEnlaceDerecho();
+            nivel++;
+        }
+    }
+
+    private void contarNodosPorNivel(NodoDoble nodo, int nivelActual, ListaInfoDinamica conteoPorNivel) {
+        if (nodo == null) {
+            return;
+        }
+        // Asegurar que la lista tenga suficiente tamaño
+        while (nivelActual >= conteoPorNivel.obtenerCantidadDeElementos()) {
+            conteoPorNivel.insertar(0);
+        }
+        // Obtener el valor actual en el nivel especificado y incrementarlo
+        Nodo nodoActual = conteoPorNivel.obtenDatoEspecifico(nivelActual);
+        Integer conteoActual = (Integer) nodoActual.getDato();
+        conteoActual++;
+        nodoActual.setDato(conteoActual);  // Actualizamos el contador
+        contarNodosPorNivel(nodo.getEnlaceIzq(), nivelActual + 1, conteoPorNivel);
+        contarNodosPorNivel(nodo.getEnlaceDer(), nivelActual + 1, conteoPorNivel);
+    }
+
+    public String encontrarNodoConPadre(Object valor) {
+        return encontrarNodoConPadre(this.raiz, null, valor);
+    }
+    
+    private String encontrarNodoConPadre(NodoDoble nodoActual, NodoDoble padre, Object valor) {
+        if (nodoActual == null) {
+            return "ERROR NODO NO ENCONTRADO";  
+        }
+        if (nodoActual.getDato().equals(valor)) {  
+            if (nodoActual == raiz) {
+                return "nodo raíz, sin padre.";
+            } else {
+                String tipoNodo = "nodo hoja";
+                if (nodoActual.getEnlaceIzq() != null || nodoActual.getEnlaceDer() != null) {
+                    tipoNodo = "nodo intermedio";
+                }
+                return tipoNodo + ", su padre es " + padre.getDato().toString();
+            }
+        }        
+        String resultadoIzq = encontrarNodoConPadre(nodoActual.getEnlaceIzq(), nodoActual, valor);
+        if (resultadoIzq.equals("ERROR NODO NO ENCONTRADO") == false) {  
+            return resultadoIzq;
+        }
+        return encontrarNodoConPadre(nodoActual.getEnlaceDer(), nodoActual, valor); 
+    }    
+    
+    public String encontrarNodoYHermano(Object valor) {
+        return encontrarNodoYHermano(this.raiz, null, valor);
+    }
+
+    private String encontrarNodoYHermano(NodoDoble nodoActual, NodoDoble padre, Object valor) {
+        if (nodoActual == null) {
+            return "El nodo no existe en el árbol.";
+        }
+        
+        if (nodoActual.getDato().toString().equals(valor)) {
+            if (nodoActual == raiz) {
+                return "El nodo es la raíz y no tiene hermanos.";
+            } else {
+                String hermano = "no tiene hermano.";
+                if (padre.getEnlaceIzq() != null && padre.getEnlaceDer() != null) {
+                    NodoDoble hermanoNodo = null;
+                    if (padre.getEnlaceIzq() == nodoActual) {
+                        hermanoNodo = padre.getEnlaceDer();
+                    } else {
+                        hermanoNodo = padre.getEnlaceIzq(); 
+                    }
+                    hermano = "tiene un hermano: " + hermanoNodo.getDato().toString();
+                }
+                return "El nodo " + nodoActual.getDato().toString() + " " + hermano;
+            }
+        }
+        String resultadoIzq = encontrarNodoYHermano(nodoActual.getEnlaceIzq(), nodoActual, valor);
+        if (resultadoIzq.equals("El nodo no existe en el árbol.")==false) {
+            return resultadoIzq;
+        }
+        return encontrarNodoYHermano(nodoActual.getEnlaceDer(), nodoActual, valor);
+    }
+
+
 }
