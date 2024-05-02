@@ -1,5 +1,6 @@
 package estructurasnolineales;
 
+import entradasalida.SalidaPorDefecto;
 import estructuraslineales.auxiliar.NodoDoble;
 import utilerias.comparador.ComparadorDeObjetos;
 
@@ -53,7 +54,6 @@ public class ArbolBinarioBusqueda extends ArbolBinario{
         }
     }
 
-
     public Object buscar(Object valor){
         return buscar(raiz, valor);
     }
@@ -71,4 +71,79 @@ public class ArbolBinarioBusqueda extends ArbolBinario{
             }
         }
     }
+
+    public void eliminarNodo(Object numero){
+        eliminarNodo(raiz, raiz, numero);
+    }
+
+    private void eliminarNodo(NodoDoble nodoActual, NodoDoble padre, Object info){
+        if (nodoActual != null) { // Si el nodo actual no es nulo, significa que hay algo en el árbol
+            if ((ComparadorDeObjetos.comparar(info, nodoActual.getDato())) == -1) {
+                eliminarNodo(nodoActual.getEnlaceIzq(), nodoActual, info);
+            }else{
+                if((ComparadorDeObjetos.comparar(info, nodoActual.getDato())) == 1){
+                    eliminarNodo(nodoActual.getEnlaceDer(), nodoActual, info);
+                }else{
+                    if (nodoActual.getEnlaceIzq() != null && nodoActual.getEnlaceDer() != null) {
+                        NodoDoble aux = nodoActual.getEnlaceIzq();
+                        NodoDoble aux1 = aux;
+                        boolean bo = false;
+                        while (aux.getEnlaceDer() != null) {
+                            aux1 = aux;
+                            aux = aux.getEnlaceDer();
+                            bo = true;
+                        }
+                        nodoActual.setDato(aux.getDato());
+                        if (bo == true) {
+                            aux1.setEnlaceDer(aux.getEnlaceIzq());
+                        }else{
+                            nodoActual.setEnlaceIzq(aux.getEnlaceIzq());
+                        }
+                    }else{ // El nodo actual tiene solo un hijo o ninguno
+                        NodoDoble otro = nodoActual;
+                        if (otro.getEnlaceDer() == null) {
+                            if (otro.getEnlaceIzq() != null) {
+                                otro = nodoActual.getEnlaceIzq();
+                                if (padre != null) {
+                                    if ((ComparadorDeObjetos.comparar(info, padre.getDato())) == -1) {
+                                        padre.setEnlaceIzq(otro);
+                                    }else{
+                                        padre.setEnlaceDer(otro);
+                                    }
+                                }else{
+                                    raiz = otro;
+                                }
+                            }else{
+                                if (padre == null) {
+                                    raiz = null;
+                                }else{
+                                    if ((ComparadorDeObjetos.comparar(info, padre.getDato())) == -1) {
+                                        padre.setEnlaceIzq(null);
+                                    }else{
+                                        padre.setEnlaceDer(null);
+                                    }
+                                }
+                            }
+                        }else{
+                            if (otro.getEnlaceIzq() == null) {
+                                otro = nodoActual.getEnlaceDer();
+                                if (padre != null) {
+                                    if ((ComparadorDeObjetos.comparar(info, padre.getDato())) == -1) {
+                                        padre.setEnlaceIzq(otro);
+                                    }else{
+                                        padre.setEnlaceDer(otro);
+                                    }
+                                }else{
+                                    raiz = otro;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }else{ // Si no se encuentra el nodo, imprime un mensaje de error
+            SalidaPorDefecto.consola("ERROR NODO NO EXISTENTE");
+        }
+    }
+    
 }
