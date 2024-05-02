@@ -20,15 +20,15 @@ public class PruebaOT {
         grafo.agregarArista("P3", "P4");
         grafo.agregarArista("P3", "P7");
         grafo.agregarArista("P8", "P6");
-        grafo.agregarArista("P8","P4");
-        grafo.agregarArista("P4","P6");
-        grafo.agregarArista("P4","P1"); 
-        grafo.agregarArista("P4","P7");
-        grafo.agregarArista("P7","P1");
-        grafo.agregarArista("P7","P2");
-        grafo.agregarArista("P6","P1");
-        grafo.agregarArista("P1","P9");
-        grafo.agregarArista("P2","P9");
+        grafo.agregarArista("P8", "P4");
+        grafo.agregarArista("P4", "P6");
+        grafo.agregarArista("P4", "P1"); 
+        grafo.agregarArista("P4", "P7");
+        grafo.agregarArista("P7", "P1");
+        grafo.agregarArista("P7", "P2");
+        grafo.agregarArista("P6", "P1");
+        grafo.agregarArista("P1", "P9");
+        grafo.agregarArista("P2", "P9");
 
         grafo.ordenacionTopologica().mostrar();
 
