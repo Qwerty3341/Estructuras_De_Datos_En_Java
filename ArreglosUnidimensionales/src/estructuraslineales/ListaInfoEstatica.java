@@ -388,7 +388,9 @@ public class ListaInfoEstatica implements VectorListaInfo{
     
     @Override
     public void rellenar(Object valor) {
-        throw new UnsupportedOperationException("Unimplemented method 'rellenar'");
+        for (int objeto = 0; objeto < arreglo.length; objeto++) {
+            arreglo[objeto] = valor;
+        }
     }
 
     @Override

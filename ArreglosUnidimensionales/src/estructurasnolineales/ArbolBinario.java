@@ -2,9 +2,7 @@ package estructurasnolineales;
 
 import entradasalida.EntradaPorDefecto;
 import entradasalida.SalidaPorDefecto;
-import estructuraslineales.ListaInfo;
 import estructuraslineales.ListaInfoDinamica;
-import estructuraslineales.ListaInfoEstatica;
 import estructuraslineales.auxiliar.Nodo;
 import estructuraslineales.auxiliar.NodoDoble;
 
@@ -93,7 +91,9 @@ public class ArbolBinario {
         } // el caso base es cuando subraiz es null
     }
 
-    //Metodos de la practica 16
+    /*
+    Metodos de la practica 16
+    */
 
     public int obtenerAltura(){
         return calcularAltura(this.raiz);
@@ -220,6 +220,4 @@ public class ArbolBinario {
         }
         return encontrarNodoYHermano(nodoActual.getEnlaceDer(), nodoActual, valor);
     }
-
-
 }

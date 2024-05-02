@@ -3,7 +3,7 @@ package pruebas;
 import entradasalida.SalidaPorDefecto;
 import estructurasnolineales.ArbolBinario;
 
-public class PruebaABMetRecur {
+public class PruebaABMetodosRecursivos {
     public static void main(String[] args) {
         //------------Calculando la altura del arbol ------------------------
         SalidaPorDefecto.consola("\n______________________________________________\n");
