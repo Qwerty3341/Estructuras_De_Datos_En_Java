@@ -1,5 +1,6 @@
 package pruebas;
 
+import entradasalida.SalidaPorDefecto;
 import estructurasnolineales.GrafoEstatico;
 
 public class PruebaGrafoRP {
@@ -28,6 +29,10 @@ public class PruebaGrafoRP {
         grafo.agregarArista("M", "R");
 
         grafo.recorridoProfundidad("A").mostrar();
+
+        SalidaPorDefecto.consola("\n\n");
+
+        grafo.recorridoAnchura("A").mostrar();
 
     }
 }

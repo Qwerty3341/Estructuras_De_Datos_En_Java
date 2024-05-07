@@ -196,4 +196,47 @@ public class GrafoEstatico {
         }
     }
 
+
+    //Recorrido en anchura
+    public ListaInfoEstatica recorridoAnchura(Object origen) {
+        ListaInfoEstatica marcados = new ListaInfoEstatica(vertices.cantidad());
+        ColaInfoEstatica cola = new ColaInfoEstatica(vertices.cantidad());
+        ListaInfoEstatica salida = new ListaInfoEstatica(vertices.cantidad());
+
+        int indiceVerticeOrigen = (int) vertices.encontrar(origen);
+
+        if (indiceVerticeOrigen >= 0) {// existe
+            // 1.Partir de un vertice origen, marcarlo y emcolarlo
+            marcados.rellenar(false, vertices.cantidad());
+            marcados.cambiar(indiceVerticeOrigen, true);
+            cola.poner(indiceVerticeOrigen);
+
+            while (cola.vacio() == false) {
+                // 2 Mientras existan elementos en la cola sacar uno y mandarlo a la cola, sacar
+                // uno y mandarlo a la salida (este vertice es el vertice actual)
+                int indiceVerticeActual = (int) cola.quitar();
+                Vertice verticeActual = (Vertice) vertices.obtener(indiceVerticeActual);
+                salida.insertar(verticeActual.getDato());
+
+                // 3. Los vertices adyacentes al vertice actual (y que no esten marcados) se
+                // emcolan y marcan
+                marcarYEncolarAdyacentes(indiceVerticeActual, marcados, cola);
+            }
+
+        } else {// no existe
+            return null;
+        }
+        return salida;
+    }
+
+    // 3. Los vertices adyacentes al vertice actual (y que no esten marcados) se
+                // emcolan y marcan
+    private void marcarYEncolarAdyacentes(int indiceVerticeActual, ListaInfoEstatica marcados, ColaInfoEstatica cola){
+        for (int cadaDestino = 0; cadaDestino < aristas.columnas; cadaDestino++) {
+            if (existeAdyacencia(indiceVerticeActual, cadaDestino) == true && (Boolean) marcados.obtener(cadaDestino) == false) {
+                marcados.cambiar(cadaDestino, true);
+                cola.poner(cadaDestino);
+            }
+        }
+    }
 }
