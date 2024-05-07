@@ -3,6 +3,7 @@ package estructurasnolineales;
 import entradasalida.SalidaPorDefecto;
 import estructuraslineales.ColaInfoEstatica;
 import estructuraslineales.ListaInfoEstatica;
+import estructuraslineales.PilaInfoEstatica;
 import estructurasnolineales.auxiliares.Vertice;
 
 public class GrafoEstatico {
@@ -150,6 +151,48 @@ public class GrafoEstatico {
         for (int cadaColumnaDestino = 0; cadaColumnaDestino < aristas.obtenerColumnas(); cadaColumnaDestino++) {
             // Mandamos llamar al metodo que calcula las incidencias de cada destino
             incidencias.insertar(incidenciasVertice(cadaColumnaDestino));
+        }
+    }
+
+    public ListaInfoEstatica recorridoProfundidad(Object origen) {
+        ListaInfoEstatica marcados = new ListaInfoEstatica(vertices.cantidad());
+        PilaInfoEstatica pila = new PilaInfoEstatica(vertices.cantidad());
+        ListaInfoEstatica salida = new ListaInfoEstatica(vertices.cantidad());
+
+        int indiceVerticeOrigen = (int) vertices.encontrar(origen);
+
+        if (indiceVerticeOrigen >= 0) {// existe
+            // 1.Partir de un vertice origen, marcarlo y empilarlo
+            marcados.rellenar(false, vertices.cantidad());
+            marcados.cambiar(indiceVerticeOrigen, true);
+            pila.poner(indiceVerticeOrigen);
+
+            while (pila.vacio() == false) {
+                // 2 Mientras existan elementos en la pila sacar uno y mandarlo a la pila, sacar
+                // uno y mandarlo a la salida (este vertice es el vertice actual)
+                int indiceVerticeActual = (int) pila.quitar();
+                Vertice verticeActual = (Vertice) vertices.obtener(indiceVerticeActual);
+                salida.insertar(verticeActual.getDato());
+
+                // 3. Los vertices adyacentes al vertice actual (y que no esten marcados) se
+                // empilan y marcan
+                marcarYEmpilarAdyacentes(indiceVerticeActual, marcados, pila);
+            }
+
+        } else {// no existe
+            return null;
+        }
+        return salida;
+    }
+
+    // 3. Los vertices adyacentes al vertice actual (y que no esten marcados) se
+    // empilan y marcan
+    private void marcarYEmpilarAdyacentes(int indiceVerticeActual, ListaInfoEstatica marcados, PilaInfoEstatica pila){
+        for (int cadaDestino = 0; cadaDestino < aristas.columnas; cadaDestino++) {
+            if (existeAdyacencia(indiceVerticeActual, cadaDestino) == true && (Boolean) marcados.obtener(cadaDestino) == false) {
+                marcados.cambiar(cadaDestino, true);
+                pila.poner(cadaDestino);
+            }
         }
     }
 
