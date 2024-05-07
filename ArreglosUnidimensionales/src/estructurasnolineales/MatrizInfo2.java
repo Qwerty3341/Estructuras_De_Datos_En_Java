@@ -360,4 +360,13 @@ public class MatrizInfo2 {
         return true;
     }
     
+    public void matrizDiagonal(Object valor){
+        if (columnas == filas) {
+            for(int indice = 0; indice < filas; indice++){
+                arreglo[indice][indice] = valor;
+            }
+        }else{//Lo que corresponda de acuerdo a no cuadradas
+
+        }
+    }
 }

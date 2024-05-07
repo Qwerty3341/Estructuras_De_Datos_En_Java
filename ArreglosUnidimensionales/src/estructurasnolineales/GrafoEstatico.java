@@ -5,16 +5,34 @@ import estructuraslineales.ColaInfoEstatica;
 import estructuraslineales.ListaInfoEstatica;
 import estructuraslineales.PilaInfoEstatica;
 import estructurasnolineales.auxiliares.Vertice;
+import utilerias.comunes.TipoDeOrdenamiento;
 
 public class GrafoEstatico {
 
     protected ListaInfoEstatica vertices;
     protected MatrizInfo2 aristas;
+    protected TipoDeOrdenamiento orden;
 
     public GrafoEstatico(int cantidadVertices) {
         vertices = new ListaInfoEstatica(cantidadVertices);
         aristas = new MatrizInfo2(cantidadVertices, cantidadVertices);
         aristas.rellenar(0.0);
+    }
+
+    public GrafoEstatico(int cantidadVertices, TipoDeOrdenamiento orden) {
+        vertices = new ListaInfoEstatica(cantidadVertices);
+        aristas = new MatrizInfo2(cantidadVertices, cantidadVertices);
+        aristas.rellenar(definirInfinito(orden));
+        this.orden = orden;
+        aristas.matrizDiagonal(0.0);
+    }
+
+    private double definirInfinito(TipoDeOrdenamiento orden) {
+        if (orden == TipoDeOrdenamiento.DEC) {// infinito positivo
+            return Double.MAX_VALUE;
+        } else {// incremental
+            return Double.MIN_VALUE;// infinito negativo
+        }
     }
 
     public boolean agregarVertice(Object valor) {
@@ -187,17 +205,17 @@ public class GrafoEstatico {
 
     // 3. Los vertices adyacentes al vertice actual (y que no esten marcados) se
     // empilan y marcan
-    private void marcarYEmpilarAdyacentes(int indiceVerticeActual, ListaInfoEstatica marcados, PilaInfoEstatica pila){
+    private void marcarYEmpilarAdyacentes(int indiceVerticeActual, ListaInfoEstatica marcados, PilaInfoEstatica pila) {
         for (int cadaDestino = 0; cadaDestino < aristas.columnas; cadaDestino++) {
-            if (existeAdyacencia(indiceVerticeActual, cadaDestino) == true && (Boolean) marcados.obtener(cadaDestino) == false) {
+            if (existeAdyacencia(indiceVerticeActual, cadaDestino) == true
+                    && (Boolean) marcados.obtener(cadaDestino) == false) {
                 marcados.cambiar(cadaDestino, true);
                 pila.poner(cadaDestino);
             }
         }
     }
 
-
-    //Recorrido en anchura
+    // Recorrido en anchura
     public ListaInfoEstatica recorridoAnchura(Object origen) {
         ListaInfoEstatica marcados = new ListaInfoEstatica(vertices.cantidad());
         ColaInfoEstatica cola = new ColaInfoEstatica(vertices.cantidad());
@@ -230,13 +248,29 @@ public class GrafoEstatico {
     }
 
     // 3. Los vertices adyacentes al vertice actual (y que no esten marcados) se
-                // emcolan y marcan
-    private void marcarYEncolarAdyacentes(int indiceVerticeActual, ListaInfoEstatica marcados, ColaInfoEstatica cola){
+    // emcolan y marcan
+    private void marcarYEncolarAdyacentes(int indiceVerticeActual, ListaInfoEstatica marcados, ColaInfoEstatica cola) {
         for (int cadaDestino = 0; cadaDestino < aristas.columnas; cadaDestino++) {
-            if (existeAdyacencia(indiceVerticeActual, cadaDestino) == true && (Boolean) marcados.obtener(cadaDestino) == false) {
+            if (existeAdyacencia(indiceVerticeActual, cadaDestino) == true
+                    && (Boolean) marcados.obtener(cadaDestino) == false) {
                 marcados.cambiar(cadaDestino, true);
                 cola.poner(cadaDestino);
             }
         }
+    }
+
+    //Generar etiquetas, algoritmo de Dijkstra
+    public ListaInfoEstatica dijkstra(Object origen){
+        return null;
+    }
+
+    //metrica optima 
+    public Double metricaOptima(Object origen, Object destino){
+        return 0.0;
+    }
+
+    //ruta optima
+    public ListaInfoEstatica rutaOptima(Object origen, Object destino){
+        return null;
     }
 }
