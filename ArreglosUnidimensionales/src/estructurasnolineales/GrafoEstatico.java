@@ -251,8 +251,7 @@ public class GrafoEstatico {
     // emcolan y marcan
     private void marcarYEncolarAdyacentes(int indiceVerticeActual, ListaInfoEstatica marcados, ColaInfoEstatica cola) {
         for (int cadaDestino = 0; cadaDestino < aristas.columnas; cadaDestino++) {
-            if (existeAdyacencia(indiceVerticeActual, cadaDestino) == true
-                    && (Boolean) marcados.obtener(cadaDestino) == false) {
+            if (existeAdyacencia(indiceVerticeActual, cadaDestino) == true && (Boolean) marcados.obtener(cadaDestino) == false) {
                 marcados.cambiar(cadaDestino, true);
                 cola.poner(cadaDestino);
             }
