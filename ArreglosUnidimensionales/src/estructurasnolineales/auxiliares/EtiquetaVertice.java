@@ -18,10 +18,10 @@ public class EtiquetaVertice {
     public void setIndiceProcedencia(int indiceProcedencia) {
         this.indiceProcedencia = indiceProcedencia;
     }
-    public int getIteracionl() {
+    public int getIteracion() {
         return iteracion;
     }
-    public void setIteracionl(int iteracionl) {
+    public void setIteracion(int iteracionl) {
         this.iteracion = iteracionl;
     }
 
@@ -29,4 +29,5 @@ public class EtiquetaVertice {
     public String toString() {
         return "["+metricaAcumulada+","+ indiceProcedencia +"] "+ iteracion;
     }
+    
 }

@@ -4,6 +4,7 @@ import entradasalida.SalidaPorDefecto;
 import estructuraslineales.ColaInfoEstatica;
 import estructuraslineales.ListaInfoEstatica;
 import estructuraslineales.PilaInfoEstatica;
+import estructurasnolineales.auxiliares.EtiquetaVertice;
 import estructurasnolineales.auxiliares.Vertice;
 import utilerias.comunes.TipoDeOrdenamiento;
 
@@ -251,25 +252,141 @@ public class GrafoEstatico {
     // emcolan y marcan
     private void marcarYEncolarAdyacentes(int indiceVerticeActual, ListaInfoEstatica marcados, ColaInfoEstatica cola) {
         for (int cadaDestino = 0; cadaDestino < aristas.columnas; cadaDestino++) {
-            if (existeAdyacencia(indiceVerticeActual, cadaDestino) == true && (Boolean) marcados.obtener(cadaDestino) == false) {
+            if (existeAdyacencia(indiceVerticeActual, cadaDestino) == true
+                    && (Boolean) marcados.obtener(cadaDestino) == false) {
                 marcados.cambiar(cadaDestino, true);
                 cola.poner(cadaDestino);
             }
         }
     }
 
-    //Generar etiquetas, algoritmo de Dijkstra
-    public ListaInfoEstatica dijkstra(Object origen){
-        return null;
+    // Generar etiquetas, algoritmo de Dijkstra
+    public ListaInfoEstatica dijkstra(Object origen) {
+        ListaInfoEstatica etiquetasOptimas = new ListaInfoEstatica(vertices.cantidad());
+        ListaInfoEstatica marcados = new ListaInfoEstatica(vertices.cantidad());
+
+        int indiceOrigen = (int) vertices.encontrar(origen);
+        if (indiceOrigen >= 0) {
+            // 1 Definir etiquetas iniciales partiendode un vertice de origen el cual debera
+            // marcarse
+            inicializarEtiquetas(indiceOrigen, etiquetasOptimas, definirInfinito(orden), -1, 0, 0);
+            marcados.rellenar(false, vertices.cantidad());
+            marcados.cambiar(indiceOrigen, true);
+            int indiceVerticeActual = indiceOrigen;
+
+            for (int iteracion = 1; iteracion < vertices.cantidad(); iteracion++) {
+                // 2 Calcular las metricas acumuladas del vertice origen (vertice actual) hacia
+                // los vecinos no marcados. Si es mejor la metrica acumulada que la de la
+                // etiqueta se sobreescribe
+                calcularMetricasAcumuladasVecinos(indiceVerticeActual, etiquetasOptimas, marcados, iteracion);
+
+                // 3 Actualizar el nuevo vertice actual tomando como base un vertice no marcado
+                // con el valor mejor en la metica
+            }
+            return etiquetasOptimas;
+        } else {
+            return null;
+        }
     }
 
-    //metrica optima 
-    public Double metricaOptima(Object origen, Object destino){
+    // 1 Definir etiquetas iniciales partiendode un vertice de origen...
+    private void inicializarEtiquetas(
+            int indiceOrigen,
+            ListaInfoEstatica etiquetas,
+            double metricaAcumulada,
+            int indiceProcedencia,
+            int iteracion,
+            int metricaAcumuladaOrigen) {
+        for (int cadaVertice = 0; cadaVertice < vertices.cantidad(); cadaVertice++) {
+            // Crearemos una etiqueta para cada vertice
+            EtiquetaVertice etiquetaNueva = new EtiquetaVertice();
+            etiquetaNueva.setMetricaAcumulada(metricaAcumulada);
+            etiquetaNueva.setIndiceProcedencia(indiceProcedencia);
+            etiquetaNueva.setIteracion(iteracion);
+            etiquetas.insertar(etiquetaNueva);
+        }
+        // la etiqueta origen le cambiuamos el valor de metrica
+        EtiquetaVertice etiquetaOrigen = (EtiquetaVertice) etiquetas.obtener(indiceOrigen);
+        etiquetaOrigen.setMetricaAcumulada(metricaAcumuladaOrigen);
+    }
+
+    // 2 Calcular las metricas acumuladas del vertice origen (vertice actual) hacia
+    // los vecinos no marcados. Si es mejor la metrica acumulada que la de la
+    // etiqueta se sobreescribe
+    private void calcularMetricasAcumuladasVecinos(int indiceActual, ListaInfoEstatica etiquetas,
+            ListaInfoEstatica marcados, int iteracionActual) {
+        // recorrer todas las columnas(destinos) partiendo del vertice actual (origen)
+        for (int cadaDestino = 0; cadaDestino < aristas.columnas; cadaDestino++) {
+            Double pesoVActualAVecino = adyacencia(indiceActual, cadaDestino);
+            if (existeAdyacencia(pesoVActualAVecino) == true && ((boolean) marcados.obtener(indiceActual) == false)) {
+                EtiquetaVertice etiquetaVActual = (EtiquetaVertice) etiquetas.obtener(indiceActual);
+                double metricaAcumuladaVactual = etiquetaVActual.getMetricaAcumulada();
+                double metricaNuevaAcumulada = metricaAcumuladaVactual + pesoVActualAVecino;
+                // Ya tenemos el calculo del indice actual hacia el vecino ahora checar si es
+                // mejor que la que
+                // tiene el propio vecino
+                EtiquetaVertice etiquetaVecino = (EtiquetaVertice) etiquetas.obtener(cadaDestino);
+
+                boolean cambiarMetrica = false;
+                if (orden == TipoDeOrdenamiento.DEC) {// Mas chico es mejor, como distancia o tiempo
+                    if (metricaNuevaAcumulada < etiquetaVecino.getMetricaAcumulada()) {
+                        cambiarMetrica = true;
+                    }
+                } else {// INC, mas grande es mejor, por ejemplo velocidad
+                    if (metricaNuevaAcumulada > etiquetaVecino.getMetricaAcumulada()) {
+                        cambiarMetrica = true;
+                    }
+                }
+
+                if (cambiarMetrica == true) {
+                    // hacer el cambio
+                    etiquetaVecino.setMetricaAcumulada(metricaNuevaAcumulada);
+                    etiquetaVecino.setIndiceProcedencia(indiceActual);
+                    etiquetaVecino.setIteracion(iteracionActual);
+                }
+
+            }
+        }
+    }
+
+    // 3 Actualizar el nuevo vertice actual tomando como base un vertice no marcado
+    // con el valor mejor en la metica
+    // Es decir encuentra el valor mas chico o mas grande de un arreglo
+    private int actualizarVerticeActual(ListaInfoEstatica marcados, ListaInfoEstatica etiquetas) {
+        double pesoMejor = definirInfinito(orden);
+        int indiceVerticeMejor = -1;
+        for (int cadaVertice = 0; cadaVertice < vertices.cantidad(); cadaVertice++) {
+            EtiquetaVertice etiquetaVertice = (EtiquetaVertice) etiquetas.obtener(cadaVertice);
+            if (orden == TipoDeOrdenamiento.DEC) {//mas chico mejor
+                if (etiquetaVertice.getMetricaAcumulada() < pesoMejor) {
+                    pesoMejor = etiquetaVertice.getMetricaAcumulada();
+                    indiceVerticeMejor = cadaVertice;
+                }
+            }else{//Mas grande mejor
+                if (etiquetaVertice.getMetricaAcumulada() > pesoMejor) {
+                    pesoMejor = etiquetaVertice.getMetricaAcumulada();
+                    indiceVerticeMejor = cadaVertice;
+                }
+            }
+        }
+        return indiceVerticeMejor;
+    }
+
+    private boolean existeAdyacencia(Double peso) {
+        if (peso != null && peso != 0 && peso != definirInfinito(orden)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    // metrica optima
+    public Double metricaOptima(Object origen, Object destino) {
         return 0.0;
     }
 
-    //ruta optima
-    public ListaInfoEstatica rutaOptima(Object origen, Object destino){
+    // ruta optima
+    public ListaInfoEstatica rutaOptima(Object origen, Object destino) {
         return null;
     }
 }
