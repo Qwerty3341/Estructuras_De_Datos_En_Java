@@ -143,7 +143,7 @@ public class Monticulo extends ArbolBinario {
         cola.poner(raiz);
         NodoDoble ultimoNodo = null;
 
-        while (!cola.vacio()) {
+        while (cola.vacio() == false) {
             ultimoNodo = (NodoDoble) cola.quitar();
             if (ultimoNodo.getEnlaceIzq() != null) {
                 cola.poner(ultimoNodo.getEnlaceIzq());

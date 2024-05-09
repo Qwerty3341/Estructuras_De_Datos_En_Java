@@ -11,7 +11,7 @@ public class PruebaMonticulo {
 
         //Insertando en los DEC
         SalidaPorDefecto.consola("\n---------------------------------------\n");
-        SalidaPorDefecto.consola("Insertando en los monticulos decrementales\n");
+        SalidaPorDefecto.consola("Insertando en el monticulo descendente\n");
         monticuloDEC.insertar(20);
         monticuloDEC.insertar(18);
         monticuloDEC.insertar(9);
@@ -19,13 +19,13 @@ public class PruebaMonticulo {
         monticuloDEC.insertar(10);
         monticuloDEC.insertar(12);
         monticuloDEC.innorden();
-        SalidaPorDefecto.consola("\nEliminando monticulo\n");
+        SalidaPorDefecto.consola("\nEliminando\n");
         monticuloDEC.eliminar();
         monticuloDEC.innorden();
 
         //Insertando en los INC
         SalidaPorDefecto.consola("\n---------------------------------------\n");
-        SalidaPorDefecto.consola("Insertando en los monticulos incrementales\n");
+        SalidaPorDefecto.consola("Insertando en el monticulo ascendente\n");
         monticuloINC.insertar(20);
         monticuloINC.insertar(18);
         monticuloINC.insertar(8);
@@ -33,7 +33,7 @@ public class PruebaMonticulo {
         monticuloINC.insertar(12);
         monticuloINC.insertar(9);
         monticuloINC.innorden();
-        SalidaPorDefecto.consola("\nEliminando monticulo\n");
+        SalidaPorDefecto.consola("\nEliminando\n");
         monticuloINC.eliminar();
         monticuloINC.innorden();
     }
