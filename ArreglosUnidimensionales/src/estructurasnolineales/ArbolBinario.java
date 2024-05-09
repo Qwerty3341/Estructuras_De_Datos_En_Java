@@ -292,4 +292,22 @@ public class ArbolBinario {
 
         }
     }
+
+    public void imprimirHojas() {
+        SalidaPorDefecto.consola("Hojas del montículo:\n");
+        imprimirHojas(raiz);
+    }
+
+    private void imprimirHojas(NodoDoble nodo) {
+        if (nodo == null) {
+            return;
+        }
+        if (nodo.getEnlaceIzq() == null && nodo.getEnlaceDer() == null) {
+            System.out.println(nodo.getDato() + " ");  // Imprime el dato del nodo hoja
+        } else {
+            // Recursivamente buscar en los hijos izquierdo y derecho
+            imprimirHojas(nodo.getEnlaceIzq());
+            imprimirHojas(nodo.getEnlaceDer());
+        }
+    }
 }
