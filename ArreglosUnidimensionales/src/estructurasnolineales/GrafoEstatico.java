@@ -123,7 +123,7 @@ public class GrafoEstatico {
 
     // 2) Marcar y encolar vertices con incidencias en 0
     private void marcarYEncolarVerticesEn0(ListaInfoEstatica marcados, ColaInfoEstatica cola,
-            ListaInfoEstatica incidencias) {
+        ListaInfoEstatica incidencias) {
         // Recorrer todos y cada uno de los vertices obteniendo su incidencia y solo
         // procesar los no marcados
         for (int cadaVertice = 0; cadaVertice < incidencias.cantidad(); cadaVertice++) {
