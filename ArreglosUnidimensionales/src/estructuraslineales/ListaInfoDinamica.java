@@ -621,6 +621,10 @@ public class ListaInfoDinamica implements ListaInfo{
     }
 
     public ListaInfoDinamica borrarV(Object valor){
+        /*
+         * Metodo para borrar determinado elemento
+         * todas las veces que aparezca
+        */
         ListaInfoDinamica elementosBorrados = new ListaInfoDinamica();
         ColaInfoDinamica colaDeAlmacen = new ColaInfoDinamica();//Esta cola es para poner los elementos eliminados
         int tamanioOriginal = this.obtenerCantidadDeElementos();//Esta variable me ayuda a saber el tamanio que va a tener la lista despues de eliminar los elementos
