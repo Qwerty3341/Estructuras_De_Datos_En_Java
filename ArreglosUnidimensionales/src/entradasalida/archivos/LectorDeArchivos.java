@@ -5,10 +5,11 @@ import java.io.IOException;
 import java.io.RandomAccessFile;
 import entradasalida.SalidaPorDefecto;
 import estructuraslineales.ListaInfoEstatica;
+import estructurasnolineales.ArbolBBIndices;
 import utilerias.strings.StringManipulator;
 
 public class LectorDeArchivos {
-    public static void leer() throws IOException{
+    public static void leer() throws IOException {
         boolean finArchivo = false;
         RandomAccessFile archivo = null;
         try {
@@ -32,30 +33,33 @@ public class LectorDeArchivos {
         archivo.close();
     }
 
-    public static void buscarID(int id) throws IOException {
-        String idStr = String.valueOf(id);
+    public static ArbolBBIndices guardarRegistros() throws IOException {
+        ArbolBBIndices arbolDeIndices = new ArbolBBIndices();
         RandomAccessFile archivo = null;
+
         try {
             archivo = new RandomAccessFile("tabla.txt", "r");
-            String linea;
+
+            String linea = archivo.readLine();
+            long direccionActual = archivo.getFilePointer();
+
             while ((linea = archivo.readLine()) != null) {
 
-                ListaInfoEstatica columnas = StringManipulator.dividir(linea, ',');
-                String cadenaActual = (String) columnas.obtener(0);
-                if (columnas.cantidad() > 0 && StringManipulator.borrarEspaciosEnBlanco(cadenaActual).equals(idStr)) {
-
-                    SalidaPorDefecto.consola("Registro: " + linea);
-                    return; 
-                }
+                ListaInfoEstatica datos = StringManipulator.dividir(linea, ',');
+                String datoActual = (String) datos.obtenerElemento(0);
+                int indiceActual = Integer.parseInt(StringManipulator.borrarEspaciosEnBlanco(datoActual));
+                arbolDeIndices.insertar(indiceActual, direccionActual);
+                direccionActual = archivo.getFilePointer();
             }
-            SalidaPorDefecto.consola("ID no encontrado.");
         } catch (FileNotFoundException fe) {
             SalidaPorDefecto.consola("Archivo no encontrado");
+        } catch (Exception e) {
+            SalidaPorDefecto.consola("Error al leer archivo" + e);
         } finally {
             if (archivo != null) {
                 archivo.close();
             }
         }
+        return arbolDeIndices;
     }
-
 }

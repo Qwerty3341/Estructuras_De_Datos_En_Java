@@ -7,7 +7,7 @@ public final class StringManipulator {
     public static String borrarEspaciosEnBlanco(String unaString) {
         String cadenaSinEspaciosEnBlanco = "";
         for (int caracter = 0; caracter < unaString.length(); caracter++) {
-            Character caracterActual = unaString.charAt(caracter);
+            char caracterActual = unaString.charAt(caracter);
             if (caracterActual != ' ') {
                 cadenaSinEspaciosEnBlanco += caracterActual;
             }
@@ -15,10 +15,8 @@ public final class StringManipulator {
         return cadenaSinEspaciosEnBlanco;
     }
 
-    /*
-     * Este metodo tiene como objetivo hacer lo mismo que el metodo .split de java
-     * (al no poder usar directamente el metodo .split hago el mio)
-     */
+    /*Este metodo tiene como objetivo hacer lo mismo que el metodo .split de java
+     * (al no poder usar directamente el metodo .split hago el mio)*/
     public static ListaInfoEstatica dividir(String unaString, char charDivisor) {
         ListaInfoEstatica cadenaDividida = new ListaInfoEstatica(unaString.length());
         String palabraActual = "";
@@ -36,7 +34,7 @@ public final class StringManipulator {
             }
         }
 
-        // Añadir la última palabra 
+        // Añadir la última palabra
         if (palabraActual.length() > 0) {
             cadenaDividida.insertar(palabraActual);
         }
