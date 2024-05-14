@@ -110,9 +110,19 @@ public class ListaInfoEstatica implements VectorListaInfo{
     public Object obtener(int indice) {
         if ( indice > posFinal || indice <= -1  ) { //revisa que el indice sea válido
             return null;
+        }else{
+            return arreglo[indice];
         }
-        return arreglo[indice];
     }
+
+    public Object obtenerElemento(int indice){
+        if (indice>=0 && indice < arreglo.length) {
+            return arreglo[indice];
+        } else {
+            return null;            
+        }
+    }
+
 
     @Override
     public boolean cambiar(Object valorViejo, Object valorNuevo, int numVeces) {
@@ -328,14 +338,6 @@ public class ListaInfoEstatica implements VectorListaInfo{
         this.arreglo = arreglo;
     }
     
-    public Object obtenerElemento(int indice){
-        if (indice>=0 && indice < arreglo.length) {
-            return arreglo[indice];
-        } else {
-            return null;            
-        }
-    }
-
     public boolean ordenar() {//Voy a usar bubble sort para ordenar la lista de mayor a menor en caso de que los objetos sean enteros o flotantes
         //Aqui validamos que los elementos sean diferentes de strings ya que las strings no se ordenan de esta manera
         if (this.estaVacia()) {

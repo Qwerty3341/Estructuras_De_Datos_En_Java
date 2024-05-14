@@ -57,7 +57,7 @@ public class ListaInfoDinamica implements ListaInfo{
         Nodo nodoNuevo = new Nodo(valor);//paso 1
         if (nodoNuevo != null) {//Se pudo
             if (estaVacia() == true) {//a
-                apuntadorFinal = nodoNuevo;
+                apuntadorInicial = nodoNuevo;
                 apuntadorFinal = nodoNuevo;
             }else{//b , c
                 //paso 2
