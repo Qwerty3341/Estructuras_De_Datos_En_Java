@@ -222,8 +222,8 @@ public class ListaInfoDinamicaOrdenada extends ListaInfoDinamica {
 
     //Otros metodos...
     @Override
-    public boolean IteradorNulo() {
-        return super.IteradorNulo();
+    public boolean iteradorNulo() {
+        return super.iteradorNulo();
     }
 
     @Override

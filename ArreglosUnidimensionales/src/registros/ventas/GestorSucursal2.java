@@ -25,7 +25,7 @@ public class GestorSucursal2 {
 
     public void mostrarVentas(){
         ventas.iniciaIterador();
-        while (ventas.IteradorNulo() == false) {
+        while (ventas.iteradorNulo() == false) {
             Venta2 ventaTemp = (Venta2) ventas.obtenDato();
             ventaTemp.mostrarNota();
             SalidaPorDefecto.consola("\n");

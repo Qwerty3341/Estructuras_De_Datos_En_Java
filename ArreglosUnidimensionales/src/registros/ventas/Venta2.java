@@ -52,7 +52,7 @@ public class Venta2 {
         articulos.iniciaIterador();
         cantidad.iniciaIterador();
 
-        while(articulos.IteradorNulo() == false){
+        while(articulos.iteradorNulo() == false){
             Producto articuloTemp = (Producto) articulos.obtenDato();
             int cantidadTemp = (int) cantidad.obtenDato();
             double subTotal = articuloTemp.getPrecio()*cantidadTemp;
@@ -78,7 +78,7 @@ public class Venta2 {
         articulos.iniciaIterador();
         cantidad.iniciaIterador();
         int consecutivoArticulo = 1;
-        while(articulos.IteradorNulo() == false){
+        while(articulos.iteradorNulo() == false){
             Producto articuloTemp = (Producto)articulos.obtenDato();
             int cantidadTemp = (int) cantidad.obtenDato();
         

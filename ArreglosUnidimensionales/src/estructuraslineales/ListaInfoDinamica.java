@@ -239,7 +239,7 @@ public class ListaInfoDinamica implements ListaInfo{
         iterador = this.apuntadorInicial;
     }
 
-    public boolean IteradorNulo(){
+    public boolean iteradorNulo(){
         if (iterador == null) {
             return true;
         }else{
@@ -248,10 +248,18 @@ public class ListaInfoDinamica implements ListaInfo{
     }
 
     public Object obtenDato(){
-        if (IteradorNulo()==false) {
+        if (iteradorNulo()==false) {
             Object dato = iterador.getDato();
             iterador = iterador.getEnlaceDerecho();
             return dato;
+        }else{
+            return null;
+        }
+    }
+
+    public Object verInicial(){
+        if (apuntadorInicial != null) {
+            return apuntadorInicial.getDato();
         }else{
             return null;
         }
