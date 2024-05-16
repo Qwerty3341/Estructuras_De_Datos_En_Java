@@ -1,7 +1,6 @@
 package pruebas;
 
-import javax.swing.GrayFilter;
-
+import entradasalida.SalidaPorDefecto;
 import estructurasnolineales.GrafoDinamico;
 
 public class PruebaGrafoDinamico {
@@ -19,10 +18,14 @@ public class PruebaGrafoDinamico {
        grafo.agregarArista("B", "C");
        grafo.agregarArista("B", "E");
        grafo.agregarArista("C", "E");
+       grafo.agregarArista("C", "D");
        grafo.agregarArista("D", "C");
        grafo.agregarArista("D", "E");
        grafo.agregarArista("E", "C");
 
        grafo.mostrar();
+
+       SalidaPorDefecto.consola("\n__________________________________________________\n");
+       grafo.recorridoAnchura("A").mostrar();;
     }
 }

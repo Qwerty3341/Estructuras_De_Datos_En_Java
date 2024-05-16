@@ -216,7 +216,11 @@ public class ListaInfoDinamica implements ListaInfo{
 
     @Override
     public Object verFinal() {
-        throw new UnsupportedOperationException("Unimplemented method 'verFinal'");
+        if (apuntadorFinal != null) {
+            return apuntadorFinal.getDato();
+        }else{
+            return null;
+        }
     }
 
     @Override

@@ -1,7 +1,11 @@
 package estructurasnolineales;
 
 import entradasalida.SalidaPorDefecto;
+import estructuraslineales.ColaInfoDinamica;
+import estructuraslineales.ColaInfoEstatica;
 import estructuraslineales.ListaInfoDinamica;
+import estructuraslineales.ListaInfoEstatica;
+import estructuraslineales.PilaInfoDinamica;
 import estructurasnolineales.auxiliares.Vertice;
 
 public class GrafoDinamico {
@@ -83,4 +87,52 @@ public class GrafoDinamico {
         }
     }
 
+    public ListaInfoDinamica recorridoAnchura(Object origen) {
+        ListaInfoDinamica marcados = new ListaInfoDinamica();
+        PilaInfoDinamica pila = new PilaInfoDinamica();
+        ListaInfoDinamica salida = new ListaInfoDinamica();
+
+        ListaInfoDinamica subListaVerticeOrigen = encontrarSubListaVertice(origen);
+
+        if (subListaVerticeOrigen != null) { // existe
+            // 1. Partir de un vértice origen, marcarlo y encolarlo.
+            Vertice verticeOrigen = (Vertice) subListaVerticeOrigen.verInicial();
+            marcados.insertar(verticeOrigen);
+            pila.poner(verticeOrigen);
+
+            while (pila.vacio() == false) {
+                // 2. Mientras existan elementos en la cola,
+                // sacar uno y mandarlo a la salida (este vértice es
+                // el vértice actual).
+                Vertice verticeActual = (Vertice) pila.quitar();
+                salida.insertar(verticeActual.getDato());
+
+                // 3. Los vértices adyacentes al vértice actual (y que
+                // no estén marcados) se encolar y marcan.
+                marcarYEmpilarAdyacentes(verticeActual, marcados, pila);
+            }
+        } else { // no existe
+            return null;
+        }
+        return salida;
+    }
+
+    private void marcarYEmpilarAdyacentes(Vertice verticeActual, ListaInfoDinamica marcados, PilaInfoDinamica pila) {
+
+        ListaInfoDinamica subListaVerticeActual = encontrarSubListaVertice(verticeActual.getDato());
+        //Recorrer las aristas de la sublista
+        //A partir del segundo elemento
+        subListaVerticeActual.iniciaIterador();
+        subListaVerticeActual.obtenDato(); //Me brinco el primero
+
+        while (subListaVerticeActual.iteradorNulo() == false) {
+            //Todos a partir del segundo
+            Vertice verticeDestino = (Vertice) subListaVerticeActual.obtenDato();
+            if (marcados.encontrar(verticeDestino.getDato()) == null) {
+                //Si no esta en los marcados no esta marcado 
+                marcados.insertar(verticeDestino);
+                pila.poner(verticeDestino);
+            }
+        }
+    }
 }
