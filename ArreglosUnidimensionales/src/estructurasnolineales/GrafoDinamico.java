@@ -1,8 +1,6 @@
 package estructurasnolineales;
 
 import entradasalida.SalidaPorDefecto;
-import estructuraslineales.ColaInfoDinamica;
-import estructuraslineales.ColaInfoEstatica;
 import estructuraslineales.ListaInfoDinamica;
 import estructuraslineales.ListaInfoEstatica;
 import estructuraslineales.PilaInfoDinamica;
@@ -134,5 +132,137 @@ public class GrafoDinamico {
                 pila.poner(verticeDestino);
             }
         }
+    }
+
+    /*
+     * Metodos de la practica 12
+    */
+    
+    public void eliminarVertice(Object vertice) {
+        ListaInfoDinamica subListaEliminar = encontrarSubListaVertice(vertice);
+        if (subListaEliminar != null) {
+            listaAdyacencia.iniciaIterador();
+            while (listaAdyacencia.iteradorNulo() == false) {
+                ListaInfoDinamica subListaVertice = (ListaInfoDinamica) listaAdyacencia.obtenDato();
+                subListaVertice.iniciaIterador();
+                subListaVertice.obtenDato();
+
+                while (subListaVertice.iteradorNulo() == false) {
+                    Vertice verticeDestino = (Vertice) subListaVertice.obtenDato();
+                    if (vertice.toString().equalsIgnoreCase(verticeDestino.getDato().toString())) {
+                        subListaVertice.borrar(verticeDestino);
+                    }
+                }
+            }
+            listaAdyacencia.borrar(subListaEliminar);
+        }
+    }
+
+    public boolean esAdyacente(Object origen, Object destino) {
+        ListaInfoDinamica subListaOrigen = encontrarSubListaVertice(origen);
+        ListaInfoDinamica subListaDestino = encontrarSubListaVertice(destino);
+        
+        if (subListaOrigen != null && subListaDestino != null) {//Asegurarnos que existan las listas 
+            subListaOrigen.iniciaIterador();
+            while (subListaOrigen.iteradorNulo() == false) {
+                Vertice verticeDestino = (Vertice) subListaOrigen.obtenDato();
+                if (destino.toString().equalsIgnoreCase(verticeDestino.getDato().toString())) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public void eliminarArista(Object origen, Object destino) {
+        ListaInfoDinamica subListaOrigen = encontrarSubListaVertice(origen);
+        if (subListaOrigen != null) {
+            subListaOrigen.iniciaIterador();
+            while (subListaOrigen.iteradorNulo() == false) {
+                Vertice verticeDestino = (Vertice) subListaOrigen.obtenDato();
+                if (destino.toString().equalsIgnoreCase(verticeDestino.getDato().toString())) {
+                    subListaOrigen.borrar(verticeDestino);
+                    break;
+                }
+            }
+        }
+    }
+
+    public Vertice buscarVertice(Object vertice) {
+        listaAdyacencia.iniciaIterador();
+        while (listaAdyacencia.iteradorNulo() == false) {
+            ListaInfoDinamica subListaVertice = (ListaInfoDinamica) listaAdyacencia.obtenDato();
+            subListaVertice.iniciaIterador();
+            while (subListaVertice.iteradorNulo() == false) {
+                Vertice verticeActual = (Vertice) subListaVertice.obtenDato();
+                if (verticeActual.getDato().toString().equalsIgnoreCase(vertice.toString())) {
+                    return verticeActual;
+                }
+            }
+        }   
+        return null;
+    }
+
+    // public ListaInfoDinamica buscarOcurrencias(Object valor) {
+        
+    // }
+
+    public boolean esMultigrafo() {
+        //Regresa verdadero si al menos dos de sus vértices están conectados entre sí por medio de dos aristas (aristas múltiples o paralelas).
+        return false;
+    }
+
+    public int gradoVertice(Object vertice) {
+        ListaInfoDinamica subListaVertice = encontrarSubListaVertice(vertice);
+        if (subListaVertice != null) {
+            return subListaVertice.obtenerCantidadDeElementos() - 1;
+        } else {
+            return 0;
+        }
+    }
+
+    public boolean hayRuta(Object origen, Object destino) {
+        //
+        return false;
+    }
+
+    public boolean esConexo() {
+        
+        return false;
+    }
+
+    public boolean hayCaminoCerrado(Object origen) {
+        
+        return false;
+    }
+
+    public boolean esCaminoSimple(Object origen, Object destino) {
+        
+        return false;
+    }
+
+    public boolean esDirigido() {
+        
+        return false;
+    }
+
+    public boolean esArbol() {
+        
+        return false;
+    }
+
+    public ListaInfoEstatica listarAristas() {
+        
+        return null;
+    }
+
+    public ListaInfoEstatica listarAristas(Object vertice) {
+        
+        return null;
+    }
+
+    public ListaInfoEstatica listarVertices() {
+        
+        return null;
     }
 }

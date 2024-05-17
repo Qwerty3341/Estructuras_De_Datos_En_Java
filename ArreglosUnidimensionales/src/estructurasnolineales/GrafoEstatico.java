@@ -341,8 +341,7 @@ public class GrafoEstatico {
     // 3. Actualizar el nuevo vértice actual tomando como base
     // un vértice no marcado con el valor mejor en métrica.
     // Es decir, encuentra el valor más chico o más grande de un arreglo
-    private int actualizarVerticeActual(ListaInfoEstatica marcados,
-            ListaInfoEstatica etiquetas) {
+    private int actualizarVerticeActual(ListaInfoEstatica marcados,ListaInfoEstatica etiquetas) {
         double pesoMejor = definirInfinito(orden);
         int indiceVerticeMejor = -1;
         for (int cadaVertice = 0; cadaVertice < vertices.cantidad(); cadaVertice++) {
@@ -475,4 +474,95 @@ public class GrafoEstatico {
             return null;
         }
     }
+
+    /*
+     * Metodos de la practica 20
+    */
+
+    public void eliminarVertice(Object vertice) {
+        int indiceVertice = (int) vertices.encontrar(vertice);// Sacar el vertice especificado en el argumento
+        if (indiceVertice >= 0) {
+            for (int arista = 0; arista < aristas.filas; arista++) {
+                aristas.cambiar(arista, indiceVertice, definirInfinito(orden));
+            }
+            for (int destino = 0; destino < aristas.columnas; destino++) {
+                aristas.cambiar(indiceVertice, destino, definirInfinito(orden));
+            }
+            vertices.borrar(indiceVertice);
+        }
+    }
+
+    public boolean esAdyacente(Object origen, Object destino) {
+        return false;
+    }
+
+    public void eliminarArista(Object origen, Object destino) {
+        
+    }
+
+    public Vertice buscarVertice(Object vertice) {
+        
+        return null;
+    }
+
+    public boolean esPseudografo() {
+        
+        return false;
+    }
+
+    public boolean esMultigrafo() {
+        
+        return false;
+    }
+
+    public int gradoVertice(Object vertice) {
+        
+        return 0;
+    }
+
+    public boolean hayRuta(Object origen, Object destino) {
+        
+        return false;
+    }
+
+    public boolean esConexo() {
+        
+        return false;
+    }
+
+    public boolean hayCaminoCerrado(Object origen) {
+        
+        return false;
+    }
+
+    public boolean esCaminoSimple(Object origen, Object destino) {
+        
+        return false;
+    }
+
+    public boolean esDirigido() {
+        
+        return false;
+    }
+
+    public boolean esArbol() {
+        
+        return false;
+    }
+
+    public ListaInfoEstatica listarAristas() {
+        
+        return null;
+    }
+
+    public ListaInfoEstatica listarAristas(Object vertice) {
+        
+        return null;
+    }
+
+    public ListaInfoEstatica listarVertices() {
+        
+        return null;
+    }
+
 }

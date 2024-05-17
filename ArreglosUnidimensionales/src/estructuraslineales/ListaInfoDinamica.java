@@ -5,6 +5,7 @@ import entradasalida.SalidaPorDefecto;
 import estructuraslineales.auxiliar.Nodo;
 import estructuraslineales.auxiliar.NodoBuscado;
 import estructurasnolineales.MatrizInfo2;
+import estructurasnolineales.auxiliares.Vertice;
 
 public class ListaInfoDinamica implements ListaInfo{
 
