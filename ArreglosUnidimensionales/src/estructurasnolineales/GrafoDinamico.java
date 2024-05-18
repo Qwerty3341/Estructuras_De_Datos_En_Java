@@ -1,5 +1,7 @@
 package estructurasnolineales;
 
+import java.util.ArrayList;
+
 import entradasalida.SalidaPorDefecto;
 import estructuraslineales.ListaInfoDinamica;
 import estructuraslineales.ListaInfoEstatica;
@@ -118,16 +120,16 @@ public class GrafoDinamico {
     private void marcarYEmpilarAdyacentes(Vertice verticeActual, ListaInfoDinamica marcados, PilaInfoDinamica pila) {
 
         ListaInfoDinamica subListaVerticeActual = encontrarSubListaVertice(verticeActual.getDato());
-        //Recorrer las aristas de la sublista
-        //A partir del segundo elemento
+        // Recorrer las aristas de la sublista
+        // A partir del segundo elemento
         subListaVerticeActual.iniciaIterador();
-        subListaVerticeActual.obtenDato(); //Me brinco el primero
+        subListaVerticeActual.obtenDato(); // Me brinco el primero
 
         while (subListaVerticeActual.iteradorNulo() == false) {
-            //Todos a partir del segundo
+            // Todos a partir del segundo
             Vertice verticeDestino = (Vertice) subListaVerticeActual.obtenDato();
             if (marcados.encontrar(verticeDestino.getDato()) == null) {
-                //Si no esta en los marcados no esta marcado 
+                // Si no esta en los marcados no esta marcado
                 marcados.insertar(verticeDestino);
                 pila.poner(verticeDestino);
             }
@@ -136,8 +138,8 @@ public class GrafoDinamico {
 
     /*
      * Metodos de la practica 12
-    */
-    
+     */
+
     public void eliminarVertice(Object vertice) {
         ListaInfoDinamica subListaEliminar = encontrarSubListaVertice(vertice);
         if (subListaEliminar != null) {
@@ -161,8 +163,8 @@ public class GrafoDinamico {
     public boolean esAdyacente(Object origen, Object destino) {
         ListaInfoDinamica subListaOrigen = encontrarSubListaVertice(origen);
         ListaInfoDinamica subListaDestino = encontrarSubListaVertice(destino);
-        
-        if (subListaOrigen != null && subListaDestino != null) {//Asegurarnos que existan las listas 
+
+        if (subListaOrigen != null && subListaDestino != null) {// Asegurarnos que existan las listas
             subListaOrigen.iniciaIterador();
             while (subListaOrigen.iteradorNulo() == false) {
                 Vertice verticeDestino = (Vertice) subListaOrigen.obtenDato();
@@ -199,19 +201,46 @@ public class GrafoDinamico {
                     return verticeActual;
                 }
             }
-        }   
+        }
         return null;
     }
 
-    // public ListaInfoDinamica buscarOcurrencias(Object valor) {
-        
-    // }
-
-    public boolean esMultigrafo() {
-        //Regresa verdadero si al menos dos de sus vértices están conectados entre sí por medio de dos aristas (aristas múltiples o paralelas).
+    public boolean esPseudografo() {
+        listaAdyacencia.iniciaIterador();
+        while (listaAdyacencia.iteradorNulo() == false) {
+            ListaInfoDinamica subListaVertice = (ListaInfoDinamica) listaAdyacencia.obtenDato();
+            Vertice vertice = (Vertice) subListaVertice.verInicial();
+            subListaVertice.iniciaIterador();
+            subListaVertice.obtenDato(); 
+            while (subListaVertice.iteradorNulo() == false) {
+                Vertice adyacente = (Vertice) subListaVertice.obtenDato();
+                if (vertice.getDato().equals(adyacente.getDato())) {
+                    return true;
+                }
+            }  
+        }
         return false;
     }
-
+    
+    public boolean esMultigrafo() {
+        listaAdyacencia.iniciaIterador();
+        while (listaAdyacencia.iteradorNulo() == false) {
+            ListaInfoDinamica subListaVertice = (ListaInfoDinamica) listaAdyacencia.obtenDato();
+            ListaInfoDinamica destinos = new ListaInfoDinamica();
+            subListaVertice.iniciaIterador();
+            subListaVertice.obtenDato();
+            while (subListaVertice.iteradorNulo() == false) {
+                Vertice verticeDestino = (Vertice) subListaVertice.obtenDato();
+                if (destinos.encontrar(verticeDestino.getDato()) != null) {
+                    return true;
+                } else {
+                    destinos.insertar(verticeDestino.getDato());
+                }
+            }
+        }
+        return false;
+    }
+    
     public int gradoVertice(Object vertice) {
         ListaInfoDinamica subListaVertice = encontrarSubListaVertice(vertice);
         if (subListaVertice != null) {
@@ -222,47 +251,258 @@ public class GrafoDinamico {
     }
 
     public boolean hayRuta(Object origen, Object destino) {
-        //
+        ListaInfoDinamica visitados = new ListaInfoDinamica();
+        ListaInfoDinamica subListaOrigen = encontrarSubListaVertice(origen);
+        if (subListaOrigen != null) {
+            return hayRutaAux(destino, visitados, subListaOrigen);
+        } else {
+            return false;
+        }
+    }
+
+    private boolean hayRutaAux(Object destino, ListaInfoDinamica visitados, ListaInfoDinamica subListaActual) {
+        visitados.insertar(((Vertice) subListaActual.verInicial()).getDato());
+        if (((Vertice) subListaActual.verInicial()).getDato().equals(destino)) {
+            return true;
+        }
+        subListaActual.iniciaIterador();
+        subListaActual.obtenDato();
+        while (subListaActual.iteradorNulo() == false) {
+            Vertice verticeAdyacente = (Vertice) subListaActual.obtenDato();
+            if (visitados.contiene(verticeAdyacente.getDato()) == false) {
+                ListaInfoDinamica subListaAdyacente = encontrarSubListaVertice(verticeAdyacente.getDato());
+                if (hayRutaAux(destino, visitados, subListaAdyacente)) {
+                    return true;
+                }
+            }
+        }
+        visitados.borrar(((Vertice) subListaActual.verInicial()).getDato());
         return false;
     }
 
     public boolean esConexo() {
-        
-        return false;
+        if (listaAdyacencia.estaVacia()) {
+            return false;
+        }
+        ListaInfoDinamica subListaPrimero = (ListaInfoDinamica) listaAdyacencia.verInicial();
+        Vertice verticePrimero = (Vertice) subListaPrimero.verInicial();
+        ListaInfoDinamica recorrido = recorridoProfundidad(verticePrimero.getDato());
+        return recorrido.obtenerCantidadDeElementos() == listaAdyacencia.obtenerCantidadDeElementos();
+    }
+
+    public ListaInfoDinamica recorridoProfundidad(Object origen) {
+        ListaInfoDinamica marcados = new ListaInfoDinamica();
+        PilaInfoDinamica pila = new PilaInfoDinamica();
+        ListaInfoDinamica salida = new ListaInfoDinamica();
+        ListaInfoDinamica subListaVerticeOrigen = encontrarSubListaVertice(origen);
+        if (subListaVerticeOrigen != null) {
+            marcados.insertar(origen);
+            pila.poner(origen);
+            while (pila.vacio() == false) {
+                Object verticeActual = pila.quitar();
+                salida.insertar(verticeActual);
+                marcarYEmpilarAdyacentes(verticeActual, marcados, pila);
+            }
+        } else {
+            return null;
+        }
+        return salida;
+    }
+
+    private void marcarYEmpilarAdyacentes(Object verticeActual, ListaInfoDinamica marcados, PilaInfoDinamica pila) {
+        ListaInfoDinamica subListaVerticeActual = encontrarSubListaVertice(verticeActual);
+        if (subListaVerticeActual != null) {
+            subListaVerticeActual.iniciaIterador();
+            subListaVerticeActual.obtenDato();
+            while (subListaVerticeActual.iteradorNulo() == false) {
+                Vertice verticeDestino = (Vertice) subListaVerticeActual.obtenDato();
+                if (marcados.contiene(verticeDestino.getDato()) == false) {
+                    marcados.insertar(verticeDestino.getDato());
+                    pila.poner(verticeDestino.getDato());
+                }
+            }
+        }
     }
 
     public boolean hayCaminoCerrado(Object origen) {
-        
+        ListaInfoDinamica visitados = new ListaInfoDinamica();
+        return hayCaminoCerradoAux(origen, origen, visitados);
+    }
+
+    private boolean hayCaminoCerradoAux(Object verticeActual, Object origen, ListaInfoDinamica visitados) {
+        visitados.insertar(verticeActual);
+        ListaInfoDinamica subListaVerticeActual = encontrarSubListaVertice(verticeActual);
+        if (subListaVerticeActual != null) {
+            subListaVerticeActual.iniciaIterador();
+            subListaVerticeActual.obtenDato();
+            while (subListaVerticeActual.iteradorNulo() == false) {
+                Vertice verticeAdyacente = (Vertice) subListaVerticeActual.obtenDato();
+                if (verticeAdyacente.getDato().equals(origen) && visitados.obtenerCantidadDeElementos() > 1) {
+                    return true;
+                }
+                if (visitados.contiene(verticeAdyacente.getDato()) == false) {
+                    if (hayCaminoCerradoAux(verticeAdyacente.getDato(), origen, visitados)) {
+                        return true;
+                    }
+                }
+            }
+        }
+        visitados.borrar(verticeActual);
         return false;
     }
 
     public boolean esCaminoSimple(Object origen, Object destino) {
-        
+        ListaInfoDinamica marcados = new ListaInfoDinamica();
+        return esCaminoSimpleAux(origen, destino, marcados);
+    }
+
+    private boolean esCaminoSimpleAux(Object origen, Object destino, ListaInfoDinamica marcados) {
+        marcados.insertar(origen);
+        ListaInfoDinamica subListaOrigen = encontrarSubListaVertice(origen);
+
+        if (subListaOrigen != null) {
+            subListaOrigen.iniciaIterador();
+            while (subListaOrigen.iteradorNulo() == false) {
+                Vertice verticeDestino = (Vertice) subListaOrigen.obtenDato();
+                if (verticeDestino.getDato().equals(destino)) {
+                    if (marcados.obtenerCantidadDeElementos() == marcados.obtenerCantidadDeElementosDistintos()) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
+                if (marcados.contiene(verticeDestino.getDato()) == false) {
+                    if (esCaminoSimpleAux(verticeDestino.getDato(), destino, marcados)) {
+                        return true;
+                    }
+                }
+            }
+        }
+        marcados.borrar(origen);
         return false;
     }
 
     public boolean esDirigido() {
-        
+        listaAdyacencia.iniciaIterador();
+        while (listaAdyacencia.iteradorNulo() == false) {
+            ListaInfoDinamica subListaVertice = (ListaInfoDinamica) listaAdyacencia.obtenDato();
+            subListaVertice.iniciaIterador();
+            while (subListaVertice.iteradorNulo() == false) {
+                Vertice verticeAdyacente = (Vertice) subListaVertice.obtenDato();
+                if (!esAdyacente(verticeAdyacente.getDato(), ((Vertice) subListaVertice.verInicial()).getDato())) {
+                    return true;
+                }
+            }
+            listaAdyacencia.avanzarIterador();
+        }
         return false;
     }
 
     public boolean esArbol() {
-        
+        if (esConexo() == false || tieneCiclos() == true) {
+            return false;
+        }
+        ListaInfoDinamica vertices = listaAdyacencia;
+        vertices.iniciaIterador();
+        while (vertices.iteradorNulo() == false) {
+            ListaInfoDinamica subListaVertice = (ListaInfoDinamica) vertices.obtenDato();
+            int contadorPadres = 0;
+            subListaVertice.iniciaIterador();
+            while (subListaVertice.iteradorNulo() == false) {
+                Vertice vertice = (Vertice) subListaVertice.obtenDato();
+                if (gradoVertice(vertice.getDato()) > 1) {
+                    contadorPadres++;
+                    if (contadorPadres > 1) {
+                        return false;
+                    }
+                }
+            }
+            vertices.avanzarIterador();
+        }
+        return true;
+    }
+
+    private boolean tieneCiclos() {
+        ListaInfoDinamica visitados = new ListaInfoDinamica();
+        ListaInfoDinamica padres = new ListaInfoDinamica();
+        listaAdyacencia.iniciaIterador();
+        while (listaAdyacencia.iteradorNulo()==false) {
+            ListaInfoDinamica subListaVertice = (ListaInfoDinamica) listaAdyacencia.obtenDato();
+            subListaVertice.iniciaIterador();
+            while (subListaVertice.iteradorNulo() == false) {
+                Vertice vertice = (Vertice) subListaVertice.obtenDato();
+                if (visitados.contiene(vertice.getDato()) == false) {
+                    if (tieneCiclosAux(vertice.getDato(), visitados, padres)) {
+                        return true;
+                    }
+                }
+            }
+            listaAdyacencia.avanzarIterador();
+        }
         return false;
     }
-
-    public ListaInfoEstatica listarAristas() {
-        
-        return null;
+    
+    private boolean tieneCiclosAux(Object vertice, ListaInfoDinamica visitados, ListaInfoDinamica padres) {
+        visitados.insertar(vertice);
+        padres.insertar(vertice);
+        ListaInfoDinamica subListaVertice = encontrarSubListaVertice(vertice);
+        subListaVertice.iniciaIterador();
+        while (subListaVertice.iteradorNulo() == false) {
+            Vertice verticeAdyacente = (Vertice) subListaVertice.obtenDato();
+            if (visitados.contiene(verticeAdyacente.getDato()) == false) {
+                if (tieneCiclosAux(verticeAdyacente.getDato(), visitados, padres)) {
+                    return true;
+                }
+            } else if (padres.contiene(verticeAdyacente.getDato())) {
+                return true;
+            }
+        }
+        padres.borrar(vertice);
+        return false;
     }
-
+    
+    public ListaInfoDinamica listarAristas() {
+        ListaInfoDinamica aristas = new ListaInfoDinamica();
+        listaAdyacencia.iniciaIterador();
+        while (listaAdyacencia.iteradorNulo() == false) {
+            ListaInfoDinamica subListaVertice = (ListaInfoDinamica) listaAdyacencia.obtenDato();
+            Vertice origen = (Vertice) subListaVertice.verInicial();
+            subListaVertice.iniciaIterador();
+            subListaVertice.obtenDato();
+            while (subListaVertice.iteradorNulo() == false) {
+                Vertice destino = (Vertice) subListaVertice.obtenDato();
+                String arista = "(" + origen.getDato().toString() + ", " + destino.getDato().toString() + ")";
+                aristas.insertar(arista);
+            }
+        }
+        return aristas;
+    }
     public ListaInfoEstatica listarAristas(Object vertice) {
-        
-        return null;
+        ListaInfoDinamica subListaVertice = encontrarSubListaVertice(vertice);
+        if (subListaVertice != null) {
+            int cantidadAristas = subListaVertice.obtenerCantidadDeElementos() - 1;
+            ListaInfoEstatica aristas = new ListaInfoEstatica(cantidadAristas);
+            subListaVertice.iniciaIterador();
+            subListaVertice.obtenDato();
+            while (subListaVertice.iteradorNulo() == false) {
+                Vertice destino = (Vertice) subListaVertice.obtenDato();
+                aristas.insertar("(" + vertice + "," + destino.getDato() + ")");
+            }
+            return aristas;
+        } else {
+            return new ListaInfoEstatica(0);
+        }
     }
-
+    
     public ListaInfoEstatica listarVertices() {
-        
-        return null;
+        int cantidadVertices = listaAdyacencia.obtenerCantidadDeElementos();
+        ListaInfoEstatica vertices = new ListaInfoEstatica(cantidadVertices);
+        listaAdyacencia.iniciaIterador();
+        while (listaAdyacencia.iteradorNulo() == false) {
+            ListaInfoDinamica subListaVertice = (ListaInfoDinamica) listaAdyacencia.obtenDato();
+            Vertice vertice = (Vertice) subListaVertice.verInicial();
+            vertices.insertar(vertice.getDato());
+        }    
+        return vertices;
     }
 }

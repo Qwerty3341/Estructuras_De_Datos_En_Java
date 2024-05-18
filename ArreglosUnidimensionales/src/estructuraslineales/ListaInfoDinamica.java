@@ -663,5 +663,37 @@ public class ListaInfoDinamica implements ListaInfo{
     public Nodo getApuntadorInicial() {
         return apuntadorInicial;
     }
+
+    /*
+     * Practica 20
+     */
+    public boolean contiene(Object unValor){
+        Nodo temp = apuntadorInicial;
+        while(temp != null){
+            if (temp.getDato() == unValor){
+                return true;
+            }
+            temp = temp.getEnlaceDerecho();
+        }
+        return false;
+    }
+
+    public int obtenerCantidadDeElementosDistintos() {
+        ListaInfoDinamica elementosDistintos = new ListaInfoDinamica();
+        Nodo temp = apuntadorInicial;
+        while (temp != null) {
+            if (!elementosDistintos.contiene(temp.getDato())) {
+                elementosDistintos.insertar(temp.getDato());
+            }
+            temp = temp.getEnlaceDerecho();
+        }
+        return elementosDistintos.obtenerCantidadDeElementos();
+    }
     
+    public void avanzarIterador() {
+        if (iteradorNulo() == false) {
+            iterador = iterador.getEnlaceDerecho();
+        }
+    }
+
 }
