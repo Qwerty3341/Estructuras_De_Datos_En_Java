@@ -12,7 +12,7 @@ public final class Ordenador {
 
         //
         while (estaOrdenado(lista) == false) {
-            aleatorio(lista);
+            shuffle(lista);
             iteraciones++;
         }
         //
@@ -22,7 +22,7 @@ public final class Ordenador {
         SalidaPorDefecto.consola("\n\nNúmero de iteraciones = " + iteraciones + "\n");
     }
 
-    private static void aleatorio(ListaInfoEstaticaNumerica lista) {
+    private static void shuffle(ListaInfoEstaticaNumerica lista) {
         for (int elemento = 0; elemento < lista.cantidad(); elemento++) {
             int indice_1 = (int) (Math.random() * lista.cantidad());
             int indice_2 = (int) (Math.random() * lista.cantidad());
