@@ -24,11 +24,11 @@ public final class Ordenador {
 
     private static void shuffle(ListaInfoEstaticaNumerica lista) {
         for (int elemento = 0; elemento < lista.cantidad(); elemento++) {
-            int indice_1 = (int) (Math.random() * lista.cantidad());
-            int indice_2 = (int) (Math.random() * lista.cantidad());
-            Double almacen = (Double) lista.obtenerElemento(indice_1);
-            lista.cambiar(indice_1, lista.obtenerElemento(indice_2));
-            lista.cambiar(indice_2, almacen);
+            int indice_aleatorio_1 = (int) (Math.random() * lista.cantidad());
+            int indice_aleatorio_2 = (int) (Math.random() * lista.cantidad());
+            Double almacen = (Double) lista.obtenerElemento(indice_aleatorio_1);
+            lista.cambiar(indice_aleatorio_1, lista.obtenerElemento(indice_aleatorio_2));
+            lista.cambiar(indice_aleatorio_2, almacen);
         }
     }
 
