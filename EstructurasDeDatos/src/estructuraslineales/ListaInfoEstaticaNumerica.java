@@ -1,5 +1,6 @@
 package estructuraslineales;
 
+import entradasalida.SalidaPorDefecto;
 import utilerias.validador.ValidadorDeObjetos;
 
 public class ListaInfoEstaticaNumerica extends ListaInfoEstatica{
@@ -241,6 +242,13 @@ public class ListaInfoEstaticaNumerica extends ListaInfoEstatica{
             copia[lug] = (Double) arreglo[lug];
         }
         return copia;
+    }
+
+    public void mostrarNumerico(){
+        for(int posIndice = 0; posIndice < this.cantidad(); posIndice++ ){
+            SalidaPorDefecto.consola("|"+arreglo[posIndice]);
+        }
+        SalidaPorDefecto.consola("|");
     }
         
 }
