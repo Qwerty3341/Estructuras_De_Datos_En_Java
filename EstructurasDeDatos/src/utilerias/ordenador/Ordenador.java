@@ -10,10 +10,12 @@ public final class Ordenador {
         SalidaPorDefecto.consola("Lista original:\n");
         lista.mostrarNumerico();
 
-        while (!estaOrdenado(lista)) {
+        //
+        while (estaOrdenado(lista) == false) {
             aleatorio(lista);
             iteraciones++;
         }
+        //
 
         SalidaPorDefecto.consola("\n\nLista ordenada:\n");
         lista.mostrarNumerico();
