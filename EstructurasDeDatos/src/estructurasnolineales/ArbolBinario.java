@@ -303,7 +303,7 @@ public class ArbolBinario {
             return;
         }
         if (nodo.getEnlaceIzq() == null && nodo.getEnlaceDer() == null) {
-            System.out.println(nodo.getDato() + " ");  // Imprime el dato del nodo hoja
+            SalidaPorDefecto.consola("/n"+nodo.getDato() + " ");  // Imprime el dato del nodo hoja
         } else {
             // Recursivamente buscar en los hijos izquierdo y derecho
             imprimirHojas(nodo.getEnlaceIzq());

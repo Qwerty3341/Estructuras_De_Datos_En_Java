@@ -10,13 +10,10 @@ public final class Ordenador {
         SalidaPorDefecto.consola("Lista original:\n");
         lista.mostrarNumerico();
 
-        //
         while (estaOrdenado(lista) == false) {
             shuffle(lista);
             iteraciones++;
         }
-        //
-
         SalidaPorDefecto.consola("\n\nLista ordenada:\n");
         lista.mostrarNumerico();
         SalidaPorDefecto.consola("\n\nNúmero de iteraciones = " + iteraciones + "\n");
